@@ -7,6 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Background="#1e2124" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="#ffca4f">PEJNT</TextBlock>
+        </Grid>
+        <Grid Background="#36393e" Grid.Row="1" Grid.Column="0">
+                        
+        </Grid>
     </Grid>
 </Window>
