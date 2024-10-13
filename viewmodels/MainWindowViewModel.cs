@@ -1,37 +1,53 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
+using Paint_Clone.enums;
+using Paint_Clone.models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace Paint_Clone.viewmodels
 {
-    class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel
     {
-        public ObservableCollection<Shape> Shapes { get; set; } = new ObservableCollection<Shape>();
+        DrawingMode drawingMode;
+        Point startingPoint;
 
         public MainWindowViewModel()
         {
-
+            drawingMode = DrawingMode.FreeHand;
         }
 
-        private void AddText()
+        public void SaveImage(UIElementCollection canvasElements)
         {
 
         }
 
-        private void SaveImage()
+        public void ChangeDrawingMode(DrawingMode drawingMode)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            this.drawingMode = drawingMode;
+        }
+
+        public void SetStartingPosition(Point startingPoint)
+        {
+            this.startingPoint = startingPoint;
+        }
+
+        public void DrawShape(Point newPoint)
+        {
+            /*Line line = new()
             {
-                Filter = ""
+                Stroke = SystemColors.WindowFrameBrush,
+                X1 = currentPoint.X,
+                Y1 = currentPoint.Y,
+                X2 = e.GetPosition(PaintSurface).X,
+                Y2 = e.GetPosition(PaintSurface).Y
             };
-        }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+            currentPoint = e.GetPosition(PaintSurface);
+
+            PaintSurface.Children.Add(line);*/
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Paint_Clone.enums;
+using Paint_Clone.models;
+using Paint_Clone.viewmodels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,35 +16,65 @@ namespace Paint_Clone
 {
     public partial class MainWindow : Window
     {
-        Point currentPoint = new Point();
+        MainWindowViewModel viewModel = new();
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void paintSurface_MouseDown(object sender, MouseButtonEventArgs e)
+        private void PaintSurface_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ButtonState != MouseButtonState.Pressed) return;
-            
-            currentPoint = e.GetPosition(paintSurface);
+
+            viewModel.SetStartingPosition(e.GetPosition(PaintSurface));
         }
 
-        private void paintSurface_MouseMove(object sender, MouseEventArgs e)
+        private void PaintSurface_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Pressed) return;
-            
-            Line line = new();
 
-            line.Stroke = SystemColors.WindowFrameBrush;
-            line.X1 = currentPoint.X;
-            line.Y1 = currentPoint.Y;
-            line.X2 = e.GetPosition(paintSurface).X;
-            line.Y2 = e.GetPosition(paintSurface).Y;
+            viewModel.DrawShape(e.GetPosition(PaintSurface));
+        }
 
-            currentPoint = e.GetPosition(paintSurface);
+        private void DrawTriangle_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ChangeDrawingMode(DrawingMode.Triangle);
+        }
 
-            paintSurface.Children.Add(line);
+        private void DrawRectangle_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ChangeDrawingMode(DrawingMode.Rectangle);
+        }
+
+        private void DrawElipse_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ChangeDrawingMode(DrawingMode.Elipse);
+        }
+
+        private void DrawLine_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ChangeDrawingMode(DrawingMode.Line);
+        }
+
+        private void DrawFreeHand_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ChangeDrawingMode(DrawingMode.FreeHand);
+        }
+
+        private void DrawText_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.ChangeDrawingMode(DrawingMode.Text);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.SaveImage(PaintSurface.Children);
+        }
+
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            PaintSurface.Children.Clear();
         }
     }
 }

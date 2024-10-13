@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paint_Clone"
         mc:Ignorable="d"
-        Title="MainWindow" Width="800" Height="450"  MinWidth="500" MinHeight="300" 
+        Title="MainWindow" Width="800" Height="450"  MinWidth="500" MinHeight="350" 
         Style="{StaticResource WinAll}">
     <Grid>
         <Grid.RowDefinitions>
@@ -32,18 +32,18 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Margin="4" FontSize="30">△</Button>
-            <Button Grid.Column="1" Margin="4" FontSize="25">▯</Button>
-            <Button Grid.Column="2" Margin="4" FontSize="30">○</Button>
-            <Button Grid.Row="1" Grid.Column="0" Margin="4" FontSize="30">—</Button>
-            <Button Grid.Row="1" Grid.Column="1" Margin="4" FontSize="30">෴</Button>
-            <Button Grid.Row="1" Grid.Column="2" Margin="4" FontSize="30">𝐓</Button>
+            <Button Grid.Column="0" Margin="4" FontSize="30" Click="DrawTriangle_Click">△</Button>
+            <Button Grid.Column="1" Margin="4" FontSize="25" Click="DrawRectangle_Click">▯</Button>
+            <Button Grid.Column="2" Margin="4" FontSize="30" Click="DrawElipse_Click">○</Button>
+            <Button Grid.Row="1" Grid.Column="0" Margin="4" FontSize="30" Click="DrawLine_Click">—</Button>
+            <Button Grid.Row="1" Grid.Column="1" Margin="4" FontSize="30" Click="DrawFreeHand_Click">෴</Button>
+            <Button Grid.Row="1" Grid.Column="2" Margin="4" FontSize="30" Click="DrawText_Click">𝐓</Button>
 
-            <Button Grid.Row="2" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center">Zapisz</Button>
-            <Button Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center">Wyczyść</Button>
+            <Button Grid.Row="2" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center" Click="SaveButton_Click">Zapisz</Button>
+            <Button Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click">Wyczyść</Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
-            <Canvas Name="paintSurface" MouseDown="paintSurface_MouseDown" MouseMove="paintSurface_MouseMove">
+            <Canvas Name="PaintSurface" MouseDown="PaintSurface_MouseDown" MouseMove="PaintSurface_MouseMove">
                 <Canvas.Background>
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Canvas.Background>
