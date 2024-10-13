@@ -4,9 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Paint_Clone"
+        xmlns:vm="clr-namespace:Paint_Clone.viewmodels"
+        xmlns:enums="clr-namespace:Paint_Clone.enums"
         mc:Ignorable="d"
         Title="MainWindow" Width="800" Height="450"  MinWidth="500" MinHeight="350" 
         Style="{StaticResource WinAll}">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -32,12 +39,89 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="0" Margin="4" FontSize="30" Click="DrawTriangle_Click">△</Button>
-            <Button Grid.Column="1" Margin="4" FontSize="25" Click="DrawRectangle_Click">▯</Button>
-            <Button Grid.Column="2" Margin="4" FontSize="30" Click="DrawElipse_Click">○</Button>
-            <Button Grid.Row="1" Grid.Column="0" Margin="4" FontSize="30" Click="DrawLine_Click">—</Button>
-            <Button Grid.Row="1" Grid.Column="1" Margin="4" FontSize="30" Click="DrawFreeHand_Click">෴</Button>
-            <Button Grid.Row="1" Grid.Column="2" Margin="4" FontSize="30" Click="DrawText_Click">𝐓</Button>
+            <!-- Przycisk do rysowania trójkąta -->
+            <Button Grid.Column="0" Margin="4" FontSize="30" Content="△" Click="DrawTriangle_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Triangle}">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Przycisk do rysowania prostokąta -->
+            <Button Grid.Column="1" Margin="4" FontSize="25" Content="▯" Click="DrawRectangle_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Rectangle}">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Przycisk do rysowania elipsy -->
+            <Button Grid.Column="2" Margin="4" FontSize="30" Content="○" Click="DrawElipse_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Elipse}">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Przycisk do rysowania linii -->
+            <Button Grid.Column="0" Grid.Row="1" Margin="4" FontSize="30" Content="/" Click="DrawLine_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Line}">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Przycisk do rysowania swobodnego -->
+            <Button Grid.Column="1" Grid.Row="1" Margin="4" FontSize="30" Content="✎" Click="DrawFreeHand_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.FreeHand}">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <!-- Przycisk do dodawania tekstu -->
+            <Button Grid.Column="2" Grid.Row="1" Margin="4" FontSize="30" Content="A" Click="DrawText_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="LightGray" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Text}">
+                                <Setter Property="Background" Value="LightGreen" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
 
             <Button Grid.Row="2" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center" Click="SaveButton_Click">Zapisz</Button>
             <Button Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click">Wyczyść</Button>

@@ -9,24 +9,39 @@ using System.Windows.Shapes;
 
 namespace Paint_Clone.viewmodels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
-        DrawingMode drawingMode;
-        Point startingPoint;
+        private DrawingMode drawingMode;
+        private Point startingPoint;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainWindowViewModel()
         {
-            drawingMode = DrawingMode.FreeHand;
+            drawingMode = DrawingMode.Triangle;
+        }
+
+        public DrawingMode CurrentDrawingMode
+        {
+            get => drawingMode;
+            set
+            {
+                if (drawingMode != value)
+                {
+                    drawingMode = value;
+                    OnPropertyChanged(nameof(CurrentDrawingMode)); 
+                }
+            }
         }
 
         public void SaveImage(UIElementCollection canvasElements)
         {
-
+            
         }
 
         public void ChangeDrawingMode(DrawingMode drawingMode)
         {
-            this.drawingMode = drawingMode;
+            CurrentDrawingMode = drawingMode;
         }
 
         public void SetStartingPosition(Point startingPoint)
@@ -36,18 +51,24 @@ namespace Paint_Clone.viewmodels
 
         public void DrawShape(Point newPoint)
         {
-            /*Line line = new()
+            /* 
+            Line line = new()
             {
                 Stroke = SystemColors.WindowFrameBrush,
-                X1 = currentPoint.X,
-                Y1 = currentPoint.Y,
-                X2 = e.GetPosition(PaintSurface).X,
-                Y2 = e.GetPosition(PaintSurface).Y
+                X1 = startingPoint.X,
+                Y1 = startingPoint.Y,
+                X2 = newPoint.X,
+                Y2 = newPoint.Y
             };
 
-            currentPoint = e.GetPosition(PaintSurface);
+            startingPoint = newPoint;
+            PaintSurface.Children.Add(line);
+            */
+        }
 
-            PaintSurface.Children.Add(line);*/
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

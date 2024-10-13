@@ -4,13 +4,17 @@
              xmlns:local="clr-namespace:Paint_Clone"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
+        <!-- Styl dla wszystkich okien -->
         <Style x:Key="WinAll" TargetType="{x:Type Window}">
-            <Setter Property="FontFamily"
-        Value="Comic Sans MS" />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
         </Style>
 
+        <!-- Styl dla wszystkich przycisków -->
         <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="Background" Value="#ffca4f"/>
+            <!-- Tło przycisków w stanie normalnym -->
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Template">
@@ -25,9 +29,11 @@
                                               VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <!-- Tło, gdy myszka znajduje się nad przyciskiem -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#f0d0a0"/>
                             </Trigger>
+                            <!-- Tło, gdy przycisk jest wciśnięty -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#ff9800"/>
                             </Trigger>

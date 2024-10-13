@@ -21,6 +21,7 @@ namespace Paint_Clone
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = viewModel;
         }
 
         private void PaintSurface_MouseDown(object sender, MouseButtonEventArgs e)
