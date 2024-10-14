@@ -11,12 +11,12 @@ namespace Paint_Clone.models
 {
     public class Square : IDrawableShape
     {
-        public Shape Draw(Point startPoint, Point endPoint)
+        public Shape Draw(Point startPoint, Point endPoint, int brushSize)
         {
             Polygon square = new Polygon
             {
                 Stroke = Brushes.Black,
-                StrokeThickness = 2,
+                StrokeThickness = brushSize,
                 Points = new PointCollection
                 {
                     startPoint,

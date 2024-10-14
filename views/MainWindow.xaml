@@ -37,6 +37,8 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Przycisk do rysowania trójkąta -->
@@ -117,8 +119,28 @@
                 </Button.Style>
             </Button>
 
-            <Button Grid.Row="2" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center" Click="SaveButton_Click">Zapisz</Button>
-            <Button Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click">Wyczyść</Button>
+            <StackPanel x:Name="TextStackPanel" Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3"  Margin="4,8,4,4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.Text}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <TextBlock Foreground="#ffca4f" FontWeight="Bold" FontSize="13" Margin="0,0,10,0">Tekst:</TextBlock>
+                <TextBox x:Name="TextToDrawTextBox" Width="130"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3" Margin="4,8,4,4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Margin="0,0,7,0" VerticalAlignment="Center" Foreground="#ffca4f" FontWeight="Bold" FontSize="13">Rozmiar:</TextBlock>
+                <Button Content="▲" Width="30" Margin="5" Command="{Binding IncreaseBrushSizeCommand}"/>
+                <TextBlock Width="50" TextAlignment="Center" Foreground="#ffca4f" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15" Text="{Binding BrushSize}"/>
+                <Button Content="▼" Width="30" Margin="5" Command="{Binding DecreaseBrushSizeCommand}"/>
+            </StackPanel> 
+            <Button Grid.Row="4" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center" Click="SaveButton_Click">Zapisz</Button>
+            <Button Grid.Row="5" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click">Wyczyść</Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
             <Canvas Name="PaintSurface" MouseLeftButtonDown="PaintSurface_MouseLeftButtonDown" MouseLeftButtonUp="PaintSurface_MouseLeftButtonUp" MouseMove="PaintSurface_MouseMove">
