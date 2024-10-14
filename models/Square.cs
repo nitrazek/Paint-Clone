@@ -23,7 +23,8 @@ namespace Paint_Clone.models
                     new Point(startPoint.X, endPoint.Y),
                     endPoint,
                     new Point(endPoint.X, startPoint.Y)
-                }
+                },
+                IsHitTestVisible = false
             };
 
             return square;

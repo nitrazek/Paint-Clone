@@ -19,7 +19,6 @@ namespace Paint_Clone.viewmodels
         DrawingModes currentDrawingMode = DrawingModes.FreeHand;
         readonly Dictionary<DrawingModes, IDrawableShape> shapeDrawers;
         Point? startPoint;
-        Shape? previewShape;
 
         public MainWindowViewModel()
         {
@@ -48,7 +47,7 @@ namespace Paint_Clone.viewmodels
             this.startPoint = startPoint;
         }
 
-        public Shape? DrawFinalShape(Point endPoint, out Shape? shapeFrame)
+        public Shape? DrawFinalShape(Point endPoint, out Rectangle? shapeFrame)
         {
             shapeFrame = null;
             if (startPoint == null || startPoint.Equals(endPoint))
@@ -64,7 +63,6 @@ namespace Paint_Clone.viewmodels
             Shape shape = shapeDrawer.Draw(startPoint.Value, endPoint);
 
             startPoint = null;
-            previewShape = null;
             return shape;
         }
 
@@ -79,7 +77,7 @@ namespace Paint_Clone.viewmodels
             return shapeDrawer.Draw(startPoint.Value, newPoint);
         }
 
-        private Shape? DrawShapeFrame(Point endPoint)
+        private Rectangle? DrawShapeFrame(Point endPoint)
         {
             if (startPoint == null || startPoint.Equals(endPoint))
                 return null;
@@ -96,7 +94,8 @@ namespace Paint_Clone.viewmodels
                 StrokeThickness = 2,
                 StrokeDashArray = new DoubleCollection { 2 },
                 Width = width + 8,
-                Height = height + 8
+                Height = height + 8,
+                IsHitTestVisible = false
             };
 
             Canvas.SetLeft(frame, Math.Min(startPoint.Value.X, endPoint.X) - 4);

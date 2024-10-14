@@ -121,7 +121,7 @@
             <Button Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click">Wyczyść</Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
-            <Canvas Name="PaintSurface" MouseDown="PaintSurface_MouseDown" MouseUp="PaintSurface_MouseUp" MouseMove="PaintSurface_MouseMove">
+            <Canvas Name="PaintSurface" MouseLeftButtonDown="PaintSurface_MouseLeftButtonDown" MouseLeftButtonUp="PaintSurface_MouseLeftButtonUp" MouseMove="PaintSurface_MouseMove">
                 <Canvas.Background>
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Canvas.Background>

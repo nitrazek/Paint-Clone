@@ -22,7 +22,8 @@ namespace Paint_Clone.models
                     startPoint,
                     new Point(startPoint.X, endPoint.Y),
                     endPoint
-                }
+                },
+                IsHitTestVisible = false
             };
 
             return triangle;

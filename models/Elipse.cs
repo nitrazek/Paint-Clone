@@ -19,7 +19,8 @@ namespace Paint_Clone.models
                 Stroke = Brushes.Black,
                 StrokeThickness = 2,
                 Width = Math.Abs(endPoint.X - startPoint.X),
-                Height = Math.Abs(endPoint.Y - startPoint.Y)
+                Height = Math.Abs(endPoint.Y - startPoint.Y),
+                IsHitTestVisible = false
             };
 
             Canvas.SetLeft(elipse, Math.Min(startPoint.X, endPoint.X));

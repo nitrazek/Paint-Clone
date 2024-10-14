@@ -21,7 +21,8 @@ namespace Paint_Clone.models
                 {
                     startPoint,
                     endPoint
-                }
+                },
+                IsHitTestVisible = false
             };
 
             return straightLine;

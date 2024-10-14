@@ -18,7 +18,7 @@ namespace Paint_Clone
     {
         MainWindowViewModel viewModel = new();
         Shape? previewShape = null;
-        Shape? shapeFrame = null;
+        Rectangle? shapeFrame = null;
 
         public MainWindow()
         {
@@ -26,29 +26,34 @@ namespace Paint_Clone
             DataContext = viewModel;
         }
 
-        private void PaintSurface_MouseDown(object sender, MouseButtonEventArgs e)
+        private void PaintSurface_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left || e.LeftButton != MouseButtonState.Pressed) return;
             Point cursorPosition = e.GetPosition(PaintSurface);
 
-            //if (cursorPosition.X >= Canvas.GetLeft(shapeFrame) &&
-            //    cursorPosition.Y >= Canvas.GetBottom(shapeFrame) &&
-            //    cursorPosition.X <= Canvas.GetRight(shapeFrame) &&
-            //    cursorPosition.Y <= Canvas.GetTop(shapeFrame))
-            //{
+            if (shapeFrame != null &&
+                cursorPosition.X >= Canvas.GetLeft(shapeFrame) &&
+                cursorPosition.Y >= Canvas.GetTop(shapeFrame) &&
+                cursorPosition.X <= Canvas.GetLeft(shapeFrame) + shapeFrame.Width &&
+                cursorPosition.Y <= Canvas.GetTop(shapeFrame) + shapeFrame.Height)
+            {
 
-            //}
-            PaintSurface.Children.Remove(shapeFrame);
-            shapeFrame = null;
+            }
+            if (shapeFrame != null)
+            {
+                PaintSurface.Children.Remove(shapeFrame);
+                shapeFrame = null;
+            }
 
             viewModel.SetStartingPosition(cursorPosition);
         }
 
-        private void PaintSurface_MouseUp(object sender, MouseButtonEventArgs e)
+        private void PaintSurface_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton != MouseButton.Left || e.LeftButton != MouseButtonState.Released) return;
-            PaintSurface.Children.Remove(previewShape);
-            previewShape = null;
+            if(previewShape != null)
+            {
+                PaintSurface.Children.Remove(previewShape);
+                previewShape = null;
+            }
 
             Point cursorPosition = e.GetPosition(PaintSurface);
             Shape? shape = viewModel.DrawFinalShape(cursorPosition, out shapeFrame);
@@ -61,7 +66,8 @@ namespace Paint_Clone
         private void PaintSurface_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton != MouseButtonState.Pressed) return;
-            PaintSurface.Children.Remove(previewShape);
+            if(previewShape != null)
+                PaintSurface.Children.Remove(previewShape);
 
             Point cursorPosition = e.GetPosition(PaintSurface);
             previewShape = viewModel.DrawPreviewShape(cursorPosition);
