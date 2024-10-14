@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Shapes;
 
 namespace Paint_Clone.models
 {
-    class Line
+    public interface IDrawableShape
     {
+        Shape Draw(Point startPoint, Point endPoint);
     }
 }

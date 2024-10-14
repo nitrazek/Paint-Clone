@@ -40,12 +40,11 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!-- Przycisk do rysowania trójkąta -->
-            <Button Grid.Column="0" Margin="4" FontSize="30" Content="△" Click="DrawTriangle_Click">
+            <Button Grid.Column="0" Margin="4" FontSize="30" Content="△" Command="{Binding ChangeDrawingModeCommand}" CommandParameter="{x:Static enums:DrawingModes.Triangle}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Triangle}">
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.Triangle}">
                                 <Setter Property="Background" Value="LightGreen" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -54,12 +53,11 @@
             </Button>
 
             <!-- Przycisk do rysowania prostokąta -->
-            <Button Grid.Column="1" Margin="4" FontSize="25" Content="▯" Click="DrawRectangle_Click">
+            <Button Grid.Column="1" Margin="4" FontSize="25" Content="▯" Command="{Binding ChangeDrawingModeCommand}" CommandParameter="{x:Static enums:DrawingModes.Square}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Rectangle}">
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.Square}">
                                 <Setter Property="Background" Value="LightGreen" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -68,12 +66,11 @@
             </Button>
 
             <!-- Przycisk do rysowania elipsy -->
-            <Button Grid.Column="2" Margin="4" FontSize="30" Content="○" Click="DrawElipse_Click">
+            <Button Grid.Column="2" Margin="4" FontSize="30" Content="○" Command="{Binding ChangeDrawingModeCommand}" CommandParameter="{x:Static enums:DrawingModes.Elipse}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Elipse}">
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.Elipse}">
                                 <Setter Property="Background" Value="LightGreen" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -82,12 +79,11 @@
             </Button>
 
             <!-- Przycisk do rysowania linii -->
-            <Button Grid.Column="0" Grid.Row="1" Margin="4" FontSize="30" Content="/" Click="DrawLine_Click">
+            <Button Grid.Column="0" Grid.Row="1" Margin="4" FontSize="30" Content="/" Command="{Binding ChangeDrawingModeCommand}" CommandParameter="{x:Static enums:DrawingModes.StraightLine}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Line}">
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.StraightLine}">
                                 <Setter Property="Background" Value="LightGreen" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -96,12 +92,11 @@
             </Button>
 
             <!-- Przycisk do rysowania swobodnego -->
-            <Button Grid.Column="1" Grid.Row="1" Margin="4" FontSize="30" Content="✎" Click="DrawFreeHand_Click">
+            <Button Grid.Column="1" Grid.Row="1" Margin="4" FontSize="30" Content="✎" Command="{Binding ChangeDrawingModeCommand}" CommandParameter="{x:Static enums:DrawingModes.FreeHand}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.FreeHand}">
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.FreeHand}">
                                 <Setter Property="Background" Value="LightGreen" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -110,12 +105,11 @@
             </Button>
 
             <!-- Przycisk do dodawania tekstu -->
-            <Button Grid.Column="2" Grid.Row="1" Margin="4" FontSize="30" Content="A" Click="DrawText_Click">
+            <Button Grid.Column="2" Grid.Row="1" Margin="4" FontSize="30" Content="A" Command="{Binding ChangeDrawingModeCommand}" CommandParameter="{x:Static enums:DrawingModes.Text}">
                 <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="LightGray" />
+                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingMode.Text}">
+                            <DataTrigger Binding="{Binding CurrentDrawingMode}" Value="{x:Static enums:DrawingModes.Text}">
                                 <Setter Property="Background" Value="LightGreen" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -127,7 +121,7 @@
             <Button Grid.Row="3" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click">Wyczyść</Button>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1">
-            <Canvas Name="PaintSurface" MouseDown="PaintSurface_MouseDown" MouseMove="PaintSurface_MouseMove">
+            <Canvas Name="PaintSurface" MouseDown="PaintSurface_MouseDown" MouseUp="PaintSurface_MouseUp" MouseMove="PaintSurface_MouseMove">
                 <Canvas.Background>
                     <SolidColorBrush Color="White" Opacity="0"/>
                 </Canvas.Background>

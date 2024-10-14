@@ -10,7 +10,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="views\" />
+    <Compile Remove="enums\DrawingMode.cs" />
+    <Compile Remove="models\Line.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
   </ItemGroup>
 
 </Project>

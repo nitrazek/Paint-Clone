@@ -1,74 +1,108 @@
-﻿using Microsoft.Win32;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
 using Paint_Clone.enums;
 using Paint_Clone.models;
+using Paint_Clone.viewmodels;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Paint_Clone.viewmodels
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public partial class MainWindowViewModel : ObservableObject
     {
-        private DrawingMode drawingMode;
-        private Point startingPoint;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        [ObservableProperty]
+        DrawingModes currentDrawingMode = DrawingModes.FreeHand;
+        readonly Dictionary<DrawingModes, IDrawableShape> shapeDrawers;
+        Point? startPoint;
+        Shape? previewShape;
 
         public MainWindowViewModel()
         {
-            drawingMode = DrawingMode.Triangle;
-        }
-
-        public DrawingMode CurrentDrawingMode
-        {
-            get => drawingMode;
-            set
+            shapeDrawers = new Dictionary<DrawingModes, IDrawableShape>
             {
-                if (drawingMode != value)
-                {
-                    drawingMode = value;
-                    OnPropertyChanged(nameof(CurrentDrawingMode)); 
-                }
-            }
+                { DrawingModes.Triangle, new Triangle() },
+                { DrawingModes.Square, new Square() },
+                { DrawingModes.StraightLine, new StraightLine() },
+                { DrawingModes.Elipse, new Elipse() }
+            };
         }
 
+        [RelayCommand]
+        void ChangeDrawingMode(DrawingModes newDrawingMode)
+        {
+            CurrentDrawingMode = newDrawingMode;
+        }
+        
         public void SaveImage(UIElementCollection canvasElements)
         {
             
         }
 
-        public void ChangeDrawingMode(DrawingMode drawingMode)
+        public void SetStartingPosition(Point startPoint)
         {
-            CurrentDrawingMode = drawingMode;
+            this.startPoint = startPoint;
         }
 
-        public void SetStartingPosition(Point startingPoint)
+        public Shape? DrawFinalShape(Point endPoint, out Shape? shapeFrame)
         {
-            this.startingPoint = startingPoint;
-        }
+            shapeFrame = null;
+            if (startPoint == null || startPoint.Equals(endPoint))
+                return null;
 
-        public void DrawShape(Point newPoint)
-        {
-            /* 
-            Line line = new()
+            if (!shapeDrawers.TryGetValue(CurrentDrawingMode, out var shapeDrawer))
             {
-                Stroke = SystemColors.WindowFrameBrush,
-                X1 = startingPoint.X,
-                Y1 = startingPoint.Y,
-                X2 = newPoint.X,
-                Y2 = newPoint.Y
+                startPoint = null;
+                return null;
+            }
+
+            shapeFrame = DrawShapeFrame(endPoint);
+            Shape shape = shapeDrawer.Draw(startPoint.Value, endPoint);
+
+            startPoint = null;
+            previewShape = null;
+            return shape;
+        }
+
+        public Shape? DrawPreviewShape(Point newPoint)
+        {
+            if (startPoint == null)
+                return null;
+
+            if (!shapeDrawers.TryGetValue(CurrentDrawingMode, out var shapeDrawer))
+                return null;
+
+            return shapeDrawer.Draw(startPoint.Value, newPoint);
+        }
+
+        private Shape? DrawShapeFrame(Point endPoint)
+        {
+            if (startPoint == null || startPoint.Equals(endPoint))
+                return null;
+
+            
+            double x1 = Math.Min(startPoint.Value.X, endPoint.X);
+            double y1 = Math.Min(startPoint.Value.Y, endPoint.Y);
+            double width = Math.Abs(startPoint.Value.X - endPoint.X);
+            double height = Math.Abs(startPoint.Value.Y - endPoint.Y);
+
+            Rectangle frame = new Rectangle
+            {
+                Stroke = Brushes.Gray,
+                StrokeThickness = 2,
+                StrokeDashArray = new DoubleCollection { 2 },
+                Width = width + 8,
+                Height = height + 8
             };
 
-            startingPoint = newPoint;
-            PaintSurface.Children.Add(line);
-            */
-        }
+            Canvas.SetLeft(frame, Math.Min(startPoint.Value.X, endPoint.X) - 4);
+            Canvas.SetTop(frame, Math.Min(startPoint.Value.Y, endPoint.Y) - 4);
 
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return frame;
         }
     }
 }

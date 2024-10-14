@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Paint_Clone.enums
 {
-    public enum DrawingMode
+    public enum DrawingModes
     {
         Triangle,
-        Rectangle,
+        Square,
         Elipse,
-        Line,
+        StraightLine,
         FreeHand,
         Text
     }
