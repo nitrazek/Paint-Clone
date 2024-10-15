@@ -12,7 +12,7 @@ namespace Paint_Clone.models
 {
     public class Elipse : IDrawableShape
     {
-        public Shape Draw(Point startPoint, Point endPoint, int brushSize)
+        public Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text)
         {
             Ellipse elipse = new Ellipse
             {

@@ -10,6 +10,6 @@ namespace Paint_Clone.models
 {
     public interface IDrawableShape
     {
-        Shape Draw(Point startPoint, Point endPoint, int brushSize);
+        Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text);
     }
 }

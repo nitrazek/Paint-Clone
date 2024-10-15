@@ -11,7 +11,7 @@ namespace Paint_Clone.models
 {
     public class StraightLine : IDrawableShape
     {
-        public Shape Draw(Point startPoint, Point endPoint, int brushSize)
+        public Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text)
         {
             Line straightLine = new Line
             {
@@ -21,7 +21,7 @@ namespace Paint_Clone.models
                 Y1 = startPoint.Y,
                 X2 = endPoint.X,
                 Y2 = endPoint.Y,
-                IsHitTestVisible = false
+                IsHitTestVisible = false,
             };
 
             return straightLine;

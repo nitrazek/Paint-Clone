@@ -66,9 +66,9 @@ namespace Paint_Clone
             if (finalShape == null)
             {
                 PaintSurface.Children.Remove(previewShape);
-                previewShape = null;
+                finalShape = viewModel.EndPreview(cursorPosition, previewShape, out shapeFrame);
 
-                finalShape = viewModel.EndPreview(cursorPosition, out shapeFrame);
+                previewShape = null;
                 if (finalShape == null || shapeFrame == null)
                     return;
 
@@ -92,9 +92,8 @@ namespace Paint_Clone
             if (finalShape == null)
             {
                 PaintSurface.Children.Remove(previewShape);
-                previewShape = null;
+                previewShape = viewModel.DrawPreviewShape(cursorPosition, previewShape);
 
-                previewShape = viewModel.DrawPreviewShape(cursorPosition);
                 if (previewShape == null) return;
 
                 PaintSurface.Children.Add(previewShape);

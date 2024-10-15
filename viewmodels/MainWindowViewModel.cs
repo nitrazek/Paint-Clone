@@ -21,6 +21,8 @@ namespace Paint_Clone.viewmodels
         DrawingModes currentDrawingMode = DrawingModes.FreeHand;
         [ObservableProperty]
         int brushSize = 2;
+        [ObservableProperty]
+        string textField = string.Empty;
         readonly Dictionary<DrawingModes, IDrawableShape> shapeDrawers;
         Point? startPoint;
         Point? lastMovementPoint;
@@ -32,7 +34,9 @@ namespace Paint_Clone.viewmodels
                 { DrawingModes.Triangle, new Triangle() },
                 { DrawingModes.Square, new Square() },
                 { DrawingModes.StraightLine, new StraightLine() },
-                { DrawingModes.Elipse, new Elipse() }
+                { DrawingModes.Elipse, new Elipse() },
+                { DrawingModes.FreeHand, new FreeHandLine() },
+                { DrawingModes.Text, new Text() }
             };
         }
 
@@ -48,7 +52,7 @@ namespace Paint_Clone.viewmodels
             startPoint = newPoint;
         }
 
-        public Shape? DrawPreviewShape(Point newPoint)
+        public Shape? DrawPreviewShape(Point newPoint, Shape previousShape)
         {
             if (startPoint == null)
                 return null;
@@ -56,10 +60,10 @@ namespace Paint_Clone.viewmodels
             if (!shapeDrawers.TryGetValue(CurrentDrawingMode, out var shapeDrawer))
                 return null;
 
-            return shapeDrawer.Draw(startPoint.Value, newPoint, BrushSize);
+            return shapeDrawer.Draw(startPoint.Value, newPoint, BrushSize, previousShape, TextField);
         }
 
-        public Shape? EndPreview(Point endPoint, out Rectangle? shapeFrame)
+        public Shape? EndPreview(Point endPoint, Shape previousShape, out Rectangle? shapeFrame)
         {
             shapeFrame = null;
             if (startPoint == null || startPoint.Equals(endPoint))
@@ -71,8 +75,8 @@ namespace Paint_Clone.viewmodels
                 return null;
             }
 
-            shapeFrame = DrawShapeFrame(endPoint);
-            Shape shape = shapeDrawer.Draw(startPoint.Value, endPoint, BrushSize);
+            Shape shape = shapeDrawer.Draw(startPoint.Value, endPoint, BrushSize, previousShape, TextField);
+            shapeFrame = DrawShapeFrame(shape);
 
             return shape;
         }
@@ -98,6 +102,21 @@ namespace Paint_Clone.viewmodels
                     polygon.Points[i] = new Point(point.X + offsetX, point.Y + offsetY);
                 }
             }
+            else if (shape is Polyline polyline)
+            {
+                for (int i = 0; i < polyline.Points.Count; i++)
+                {
+                    Point point = polyline.Points[i];
+                    polyline.Points[i] = new Point(point.X + offsetX, point.Y + offsetY);
+                }
+            }
+            else if (shape is Line line)
+            {
+                line.X1 += offsetX;
+                line.Y1 += offsetY;
+                line.X2 += offsetX;
+                line.Y2 += offsetY;
+            }
             else
             {
                 Canvas.SetLeft(shape, Canvas.GetLeft(shape) + offsetX);
@@ -111,24 +130,10 @@ namespace Paint_Clone.viewmodels
         public Rectangle? EndMoving(Shape shape, Point newMousePosition)
         {
             if (shape == null || startPoint == null || lastMovementPoint == null) return null;
+            
             MoveShape(shape, newMousePosition);
+            Rectangle? shapeFrame = DrawShapeFrame(shape);
 
-            double maxX, maxY;
-
-            if (shape is Polygon polygon)
-            {
-                var points = polygon.Points;
-
-                maxX = points.Max(p => p.X);
-                maxY = points.Max(p => p.Y);
-            }
-            else
-            {
-                maxX = startPoint.Value.X + shape.Width;
-                maxY = startPoint.Value.Y + shape.Height;
-            }
-
-            Rectangle? shapeFrame = DrawShapeFrame(new Point(maxX, maxY));
             lastMovementPoint = null;
             return shapeFrame;
         }
@@ -139,15 +144,57 @@ namespace Paint_Clone.viewmodels
             lastMovementPoint = null;
         }
 
-        private Rectangle? DrawShapeFrame(Point endPoint)
+        private Rectangle? DrawShapeFrame(Shape shape)
         {
-            if (startPoint == null || startPoint.Equals(endPoint))
-                return null;
-            
-            double x1 = Math.Min(startPoint.Value.X, endPoint.X);
-            double y1 = Math.Min(startPoint.Value.Y, endPoint.Y);
-            double width = Math.Abs(startPoint.Value.X - endPoint.X);
-            double height = Math.Abs(startPoint.Value.Y - endPoint.Y);
+            double minX, minY, maxX, maxY;
+
+            if (shape is Polygon polygon)
+            {
+                if (polygon.Points.Count == 0) return null;
+
+                minX = maxX = polygon.Points[0].X;
+                minY = maxY = polygon.Points[0].Y;
+
+                foreach (var point in polygon.Points)
+                {
+                    if (point.X < minX) minX = point.X;
+                    if (point.X > maxX) maxX = point.X;
+                    if (point.Y < minY) minY = point.Y;
+                    if (point.Y > maxY) maxY = point.Y;
+                }
+            }
+            else if (shape is Polyline polyline)
+            {
+                if (polyline.Points.Count == 0) return null;
+
+                minX = maxX = polyline.Points[0].X;
+                minY = maxY = polyline.Points[0].Y;
+
+                foreach (var point in polyline.Points)
+                {
+                    if (point.X < minX) minX = point.X;
+                    if (point.X > maxX) maxX = point.X;
+                    if (point.Y < minY) minY = point.Y;
+                    if (point.Y > maxY) maxY = point.Y;
+                }
+            }
+            else if (shape is Line line)
+            {
+                minX = Math.Min(line.X1, line.X2);
+                maxX = Math.Max(line.X1, line.X2);
+                minY = Math.Min(line.Y1, line.Y2);
+                maxY = Math.Max(line.Y1, line.Y2);
+            }
+            else
+            {
+                minX = Canvas.GetLeft(shape);
+                minY = Canvas.GetTop(shape);
+                maxX = minX + shape.Width;
+                maxY = minY + shape.Height;
+            }
+
+            double width = maxX - minX;
+            double height = maxY - minY;
 
             Rectangle frame = new Rectangle
             {
@@ -159,8 +206,8 @@ namespace Paint_Clone.viewmodels
                 IsHitTestVisible = false
             };
 
-            Canvas.SetLeft(frame, Math.Min(startPoint.Value.X, endPoint.X) - 4);
-            Canvas.SetTop(frame, Math.Min(startPoint.Value.Y, endPoint.Y) - 4);
+            Canvas.SetLeft(frame, minX - 4);
+            Canvas.SetTop(frame, minY - 4);
 
             return frame;
         }
