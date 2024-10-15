@@ -13,15 +13,14 @@ namespace Paint_Clone.models
     {
         public Shape Draw(Point startPoint, Point endPoint, int brushSize)
         {
-            Polygon straightLine = new Polygon
+            Line straightLine = new Line
             {
                 Stroke = Brushes.Black,
                 StrokeThickness = brushSize,
-                Points = new PointCollection
-                {
-                    startPoint,
-                    endPoint
-                },
+                X1 = startPoint.X,
+                Y1 = startPoint.Y,
+                X2 = endPoint.X,
+                Y2 = endPoint.Y,
                 IsHitTestVisible = false
             };
 

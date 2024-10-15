@@ -6,9 +6,11 @@ using Paint_Clone.models;
 using Paint_Clone.viewmodels;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
 namespace Paint_Clone.viewmodels
@@ -30,8 +32,7 @@ namespace Paint_Clone.viewmodels
                 { DrawingModes.Triangle, new Triangle() },
                 { DrawingModes.Square, new Square() },
                 { DrawingModes.StraightLine, new StraightLine() },
-                { DrawingModes.Elipse, new Elipse() },
-
+                { DrawingModes.Elipse, new Elipse() }
             };
         }
 
@@ -112,7 +113,22 @@ namespace Paint_Clone.viewmodels
             if (shape == null || startPoint == null || lastMovementPoint == null) return null;
             MoveShape(shape, newMousePosition);
 
-            Rectangle? shapeFrame = DrawShapeFrame(new Point(startPoint.Value.X + shape.ActualWidth, startPoint.Value.Y + shape.ActualHeight));
+            double maxX, maxY;
+
+            if (shape is Polygon polygon)
+            {
+                var points = polygon.Points;
+
+                maxX = points.Max(p => p.X);
+                maxY = points.Max(p => p.Y);
+            }
+            else
+            {
+                maxX = startPoint.Value.X + shape.Width;
+                maxY = startPoint.Value.Y + shape.Height;
+            }
+
+            Rectangle? shapeFrame = DrawShapeFrame(new Point(maxX, maxY));
             lastMovementPoint = null;
             return shapeFrame;
         }
@@ -120,6 +136,7 @@ namespace Paint_Clone.viewmodels
         public void EndDrawing()
         {
             startPoint = null;
+            lastMovementPoint = null;
         }
 
         private Rectangle? DrawShapeFrame(Point endPoint)

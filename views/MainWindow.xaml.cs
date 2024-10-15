@@ -82,7 +82,6 @@ namespace Paint_Clone
 
                 PaintSurface.Children.Add(shapeFrame);
             }
-
         }
 
         private void PaintSurface_MouseMove(object sender, MouseEventArgs e)
@@ -122,6 +121,10 @@ namespace Paint_Clone
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             PaintSurface.Children.Clear();
+            viewModel.EndDrawing();
+            previewShape = null;
+            finalShape = null;
+            shapeFrame = null;
         }
     }
 }

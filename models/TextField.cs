@@ -4,15 +4,7 @@ using System.Windows.Controls;
 
 namespace Paint_Clone.models
 {
-    public class TextField //: IDrawableShape
+    public class TextField
     {
-        //public Shape Draw(Point startPoint, Point endPoint)
-        //{
-
-        //    Polygon textBlock = new Polygon
-        //    {
-        //       
-        //    }
-        //}
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Paint_Clone.models
 {
-    class FreeHandLine 
+    public class FreeHandLine 
     {
     }
 }
