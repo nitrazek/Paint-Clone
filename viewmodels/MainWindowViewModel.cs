@@ -110,6 +110,17 @@ namespace Paint_Clone.viewmodels
                     polyline.Points[i] = new Point(point.X + offsetX, point.Y + offsetY);
                 }
             }
+            else if (shape is Path path)
+            {
+                var geometry = path.Data;
+                if (geometry != null)
+                {
+                    var translateTransform = path.RenderTransform as TranslateTransform ?? new TranslateTransform();
+                    translateTransform.X += offsetX;
+                    translateTransform.Y += offsetY;
+                    path.RenderTransform = translateTransform;
+                }
+            }
             else if (shape is Line line)
             {
                 line.X1 += offsetX;
@@ -178,6 +189,23 @@ namespace Paint_Clone.viewmodels
                     if (point.Y > maxY) maxY = point.Y;
                 }
             }
+            else if (shape is Path path)
+            {
+                if (path.Data == null) return null;
+
+                Rect bounds = path.Data.Bounds;
+
+                if (path.RenderTransform is TranslateTransform translateTransform)
+                {
+                    bounds.X += translateTransform.X;
+                    bounds.Y += translateTransform.Y;
+                }
+
+                minX = bounds.X;
+                minY = bounds.Y;
+                maxX = bounds.X + bounds.Width;
+                maxY = bounds.Y + bounds.Height;
+            }
             else if (shape is Line line)
             {
                 minX = Math.Min(line.X1, line.X2);
@@ -211,5 +239,6 @@ namespace Paint_Clone.viewmodels
 
             return frame;
         }
+
     }
 }
