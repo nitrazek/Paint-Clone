@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="enums\DrawingMode.cs" />
-    <Compile Remove="models\Line.cs" />
+    <Compile Remove="BasicDrawingMode\Enums\DrawingMode.cs" />
+    <Compile Remove="BasicDrawingMode\Models\Line.cs" />
   </ItemGroup>
 
   <ItemGroup>

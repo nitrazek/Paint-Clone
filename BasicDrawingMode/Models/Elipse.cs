@@ -7,8 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Paint_Clone.BasicDrawingMode.Interfaces;
 
-namespace Paint_Clone.models
+namespace Paint_Clone.BasicDrawingMode.Models
 {
     public class Elipse : IDrawableShape
     {

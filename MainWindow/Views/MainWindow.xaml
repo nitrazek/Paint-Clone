@@ -1,0 +1,35 @@
+﻿<Window x:Class="Paint_Clone.MainWindow.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Paint_Clone.MainWindow.Views"
+        mc:Ignorable="d"
+        Title="Pejnt" Width="1280" Height="720"  MinWidth="500" MinHeight="350" 
+        Style="{StaticResource WinAll}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#1e2124" Grid.Row="0" Grid.ColumnSpan="2" Panel.ZIndex="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton GroupName="ToogleModeGroup" IsChecked="True">Basic Drawing</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Grid.Column="1">Color Spaces</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Grid.Column="2" IsEnabled="False">File Formats</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Grid.Column="3" IsEnabled="False">Digital Filters</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Grid.Column="4" IsEnabled="False">Morphological Filters</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Grid.Column="5" IsEnabled="False">Bézier Curve and transform</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Grid.Column="6" IsEnabled="False">Image analysis</RadioButton>
+        </Grid>
+        <Frame x:Name="MainWindowFrame"/>
+    </Grid>
+</Window>

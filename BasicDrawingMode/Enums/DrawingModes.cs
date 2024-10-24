@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Paint_Clone.enums
+namespace Paint_Clone.BasicDrawingMode.Enums
 {
     public enum DrawingModes
     {

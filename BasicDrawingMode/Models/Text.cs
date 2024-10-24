@@ -3,9 +3,10 @@ using System.Windows.Shapes;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Globalization;
+using Paint_Clone.BasicDrawingMode.Interfaces;
 
 
-namespace Paint_Clone.models
+namespace Paint_Clone.BasicDrawingMode.Models
 {
     public class Text : IDrawableShape
     {

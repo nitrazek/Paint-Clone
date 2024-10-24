@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Media;
+using Paint_Clone.BasicDrawingMode.Interfaces;
 
-namespace Paint_Clone.models
+namespace Paint_Clone.BasicDrawingMode.Models
 {
     public class FreeHandLine : IDrawableShape
     {

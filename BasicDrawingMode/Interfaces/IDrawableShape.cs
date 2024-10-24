@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
 
-namespace Paint_Clone.models
+namespace Paint_Clone.BasicDrawingMode.Interfaces
 {
     public interface IDrawableShape
     {
