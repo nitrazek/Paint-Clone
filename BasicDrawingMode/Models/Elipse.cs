@@ -9,25 +9,24 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Paint_Clone.BasicDrawingMode.Interfaces;
 
-namespace Paint_Clone.BasicDrawingMode.Models
+namespace Paint_Clone.BasicDrawingMode.Models;
+
+public class Elipse : IDrawableShape
 {
-    public class Elipse : IDrawableShape
+    public Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text)
     {
-        public Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text)
+        Ellipse elipse = new Ellipse
         {
-            Ellipse elipse = new Ellipse
-            {
-                Stroke = Brushes.Black,
-                StrokeThickness = brushSize,
-                Width = Math.Abs(endPoint.X - startPoint.X),
-                Height = Math.Abs(endPoint.Y - startPoint.Y),
-                IsHitTestVisible = false
-            };
+            Stroke = Brushes.Black,
+            StrokeThickness = brushSize,
+            Width = Math.Abs(endPoint.X - startPoint.X),
+            Height = Math.Abs(endPoint.Y - startPoint.Y),
+            IsHitTestVisible = false
+        };
 
-            Canvas.SetLeft(elipse, Math.Min(startPoint.X, endPoint.X));
-            Canvas.SetTop(elipse, Math.Min(startPoint.Y, endPoint.Y));
+        Canvas.SetLeft(elipse, Math.Min(startPoint.X, endPoint.X));
+        Canvas.SetTop(elipse, Math.Min(startPoint.Y, endPoint.Y));
 
-            return elipse;
-        }
+        return elipse;
     }
 }

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Paint_Clone.ColorSpacesMode.viewmodels
-{
-    public class ColorSpaceViewmodel
-    {
+namespace Paint_Clone.ColorSpacesMode.ViewModels;
 
-    }
+public class ColorSpaceViewModel
+{
+
 }

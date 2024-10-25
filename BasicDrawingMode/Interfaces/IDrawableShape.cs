@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
 
-namespace Paint_Clone.BasicDrawingMode.Interfaces
+namespace Paint_Clone.BasicDrawingMode.Interfaces;
+
+public interface IDrawableShape
 {
-    public interface IDrawableShape
-    {
-        Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text);
-    }
+    Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text);
 }

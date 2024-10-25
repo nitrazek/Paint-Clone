@@ -13,13 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Paint_Clone.ColorSpacesMode.views
+namespace Paint_Clone.ColorSpacesMode.Views;
+
+public partial class ColorSpacesView : UserControl
 {
-    public partial class ColorSpacesView : Page
+    public ColorSpacesView()
     {
-        public ColorSpacesView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

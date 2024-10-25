@@ -1,16 +1,15 @@
 ﻿<Application x:Class="Paint_Clone.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Paint_Clone"
-             StartupUri="MainWindow/Views/MainWindow.xaml">
+             xmlns:local="clr-namespace:Paint_Clone">
     <Application.Resources>
 
-        <!-- Styl dla wszystkich okien -->
+        <!-- Style for all windows -->
         <Style x:Key="WinAll" TargetType="{x:Type Window}">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
         </Style>
 
-        <!-- Styl dla wszystkich przycisków -->
+        <!-- Style for all buttons -->
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Comic Sans MS"/>
             <Setter Property="Background" Value="#ffca4f"/>
@@ -27,11 +26,11 @@
                                               VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <!-- Tło, gdy myszka znajduje się nad przyciskiem -->
+                            <!-- Background when mouse is over the button -->
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#f0d0a0"/>
                             </Trigger>
-                            <!-- Tło, gdy przycisk jest wciśnięty -->
+                            <!-- Background when the button is pressed -->
                             <Trigger Property="IsPressed" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="#ff9800"/>
                             </Trigger>

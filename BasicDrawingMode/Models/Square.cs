@@ -8,27 +8,26 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Paint_Clone.BasicDrawingMode.Interfaces;
 
-namespace Paint_Clone.BasicDrawingMode.Models
-{
-    public class Square : IDrawableShape
-    {
-        public Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text)
-        {
-            Polygon square = new Polygon
-            {
-                Stroke = Brushes.Black,
-                StrokeThickness = brushSize,
-                Points = new PointCollection
-                {
-                    startPoint,
-                    new Point(startPoint.X, endPoint.Y),
-                    endPoint,
-                    new Point(endPoint.X, startPoint.Y)
-                },
-                IsHitTestVisible = false
-            };
+namespace Paint_Clone.BasicDrawingMode.Models;
 
-            return square;
-        }
+public class Square : IDrawableShape
+{
+    public Shape Draw(Point startPoint, Point endPoint, int brushSize, Shape? shape, string text)
+    {
+        Polygon square = new Polygon
+        {
+            Stroke = Brushes.Black,
+            StrokeThickness = brushSize,
+            Points = new PointCollection
+            {
+                startPoint,
+                new Point(startPoint.X, endPoint.Y),
+                endPoint,
+                new Point(endPoint.X, startPoint.Y)
+            },
+            IsHitTestVisible = false
+        };
+
+        return square;
     }
 }

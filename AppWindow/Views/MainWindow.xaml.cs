@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paint_Clone.AppWindow.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +11,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Paint_Clone.BasicDrawingMode.Views
+namespace Paint_Clone.AppWindow.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class BasicDrawingPage : Page
+    public MainWindow(MainWindowViewModel viewModel)
     {
-        public BasicDrawingPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        DataContext = viewModel;
     }
 }
