@@ -7,8 +7,17 @@
         xmlns:local="clr-namespace:Paint_Clone.AppWindow.Views"
         mc:Ignorable="d"
         Title="Pejnt" Width="1280" Height="720"  MinWidth="500" MinHeight="350"
-        Style="{DynamicResource WinAll}"
         d:DataContext="{d:DesignInstance vms:MainWindowViewModel}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Paint-Clone;component/Styles/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -25,13 +34,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <RadioButton GroupName="ToogleModeGroup" Command="{Binding ShowBasicDrawingViewCommand}" IsChecked="True">Basic Drawing</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Command="{Binding ShowColorSpacesViewCommand}" Grid.Column="1">Color Spaces</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Grid.Column="2" IsEnabled="False">File Formats</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Grid.Column="3" IsEnabled="False">Digital Filters</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Grid.Column="4" IsEnabled="False">Morphological Filters</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Grid.Column="5" IsEnabled="False">Bézier Curve and transform</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Grid.Column="6" IsEnabled="False">Image analysis</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowBasicDrawingViewCommand}" IsChecked="True">Basic Drawing</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowColorSpacesViewCommand}" Grid.Column="1">Color Spaces</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="2" IsEnabled="False">File Formats</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="3" IsEnabled="False">Digital Filters</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="4" IsEnabled="False">Morphological Filters</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="5" IsEnabled="False">Bézier Curve and transform</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="6" IsEnabled="False">Image analysis</RadioButton>
         </Grid>
         <Rectangle Grid.Row="1" Fill="Black"/>
         <ContentControl Grid.Row="2" Content="{Binding CurrentView}"/>

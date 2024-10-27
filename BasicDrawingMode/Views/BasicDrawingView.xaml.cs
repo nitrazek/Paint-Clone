@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
+using Paint_Clone.BasicDrawingMode.Utils;
 using Paint_Clone.BasicDrawingMode.ViewModels;
-using Paint_Clone.utils;
 using System;
 using System.Collections.Generic;
 using System.IO;

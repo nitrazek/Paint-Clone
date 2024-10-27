@@ -9,7 +9,149 @@
              Background="White"
              d:DesignHeight="675" d:DesignWidth="1280"
              d:DataContext="{d:DesignInstance vms:ColorSpaceViewModel}">
-    <Grid>
-        <TextBlock>LOOOOL</TextBlock>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Paint-Clone;component/Styles/ResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="#36393e">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- COLOR PREVIEW -->
+        <TextBlock Foreground="#ffca4f" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">Color preview</TextBlock>
+        <Rectangle x:Name="ColorRectangle" Grid.Row="1" Margin="20" Fill="{Binding PreviewColor}"/>
+        
+        <!-- RGB -->        
+        <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">RGB</TextBlock>
+        <Grid Grid.Row="1" Grid.Column="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center">Red:</TextBlock>
+            <TextBox Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding RgbRed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding RgbRed, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="3" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Green:</TextBlock>
+            <TextBox Grid.Row="3" Margin="5" Grid.Column="1" Text="{Binding RgbGreen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding RgbGreen, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="5" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Blue:</TextBlock>
+            <TextBox Grid.Row="5" Margin="5" Grid.Column="1" Text="{Binding RgbBlue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="6" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding RgbBlue, Mode=TwoWay}"></Slider>
+        </Grid>
+        
+        <!-- CMYK -->
+        <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">CMYK</TextBlock>
+        
+        <Grid Grid.Row="1" Grid.Column="2" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Cyan:</TextBlock>
+            <TextBox Margin="5" Grid.Column="1" Text="{Binding CmykCyan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding CmykCyan, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="2" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Magenta:</TextBlock>
+            <TextBox Grid.Row="2" Margin="5" Grid.Column="1" Text="{Binding CmykMagenta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="3" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding CmykMagenta, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="4" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Yellow:</TextBlock>
+            <TextBox Grid.Row="4" Margin="5" Grid.Column="1" Text="{Binding CmykYellow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="5" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding CmykYellow, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="6" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center" >Black:</TextBlock>
+            <TextBox Grid.Row="6" Margin="5" Grid.Column="1" Text="{Binding CmykBlack, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="7" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding CmykBlack, Mode=TwoWay}"></Slider>
+        </Grid>
+        
+        <!-- HSV -->
+        <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30">HSV</TextBlock>
+
+        <Grid Grid.Row="1" Grid.Column="3" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="85"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center">Hue:</TextBlock>
+            <TextBox Margin="5" Grid.Row="1" Grid.Column="1" Text="{Binding HsvHue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="360" Value="{Binding HsvHue, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="3" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Saturation:</TextBlock>
+            <TextBox Grid.Row="3" Margin="5" Grid.Column="1" Text="{Binding HsvSaturation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding HsvSaturation, Mode=TwoWay}"></Slider>
+
+            <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="5" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Value:</TextBlock>
+            <TextBox Grid.Row="5" Margin="5" Grid.Column="1" Text="{Binding HsvValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <Slider Margin="5" Grid.Row="6" Grid.Column="1" Minimum="0" Maximum="100" Value="{Binding HsvValue, Mode=TwoWay}"></Slider>
+        </Grid>
+
+        <!-- RGB CUBE VIEWPORT -->
+        <Viewport3D Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
+            
+        </Viewport3D>
+
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="10" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Tutaj będzie kostka rgb
+        </TextBlock>
+        
+        <!-- HSV CONE VIEWPORT -->
+        <Viewport3D Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
+
+        </Viewport3D>
+
+        <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Tutaj będzie stożek hsv
+        </TextBlock>
+
+
     </Grid>
 </UserControl>

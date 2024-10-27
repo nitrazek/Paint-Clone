@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Paint_Clone.ColorSpacesMode.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,9 @@ namespace Paint_Clone.ColorSpacesMode.Views;
 
 public partial class ColorSpacesView : UserControl
 {
-    public ColorSpacesView()
+    public ColorSpacesView(ColorSpaceViewModel viewModel)
     {
         InitializeComponent();
+        DataContext = viewModel;
     }
 }

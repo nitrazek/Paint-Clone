@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Paint_Clone.utils;
+namespace Paint_Clone.BasicDrawingMode.Utils;
 
 class CanvasToImage
 {
@@ -33,8 +33,8 @@ class CanvasToImage
         PngBitmapEncoder encoder = new PngBitmapEncoder();
         encoder.Frames.Add(BitmapFrame.Create(render));
 
-        using (FileStream fileStream = new FileStream(filename, FileMode.Create)) 
-        { 
+        using (FileStream fileStream = new FileStream(filename, FileMode.Create))
+        {
             encoder.Save(fileStream);
         }
 
