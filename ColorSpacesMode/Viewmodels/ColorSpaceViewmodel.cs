@@ -102,7 +102,6 @@ public partial class ColorSpaceViewModel : ObservableObject
 
         PreviewColor.Color = Color.FromScRgb(1, (float)RgbRed / 255, (float)RgbGreen / 255, (float)RgbBlue / 255);
 
-
         isChanging = false;
     }
 
@@ -122,7 +121,6 @@ public partial class ColorSpaceViewModel : ObservableObject
         CmykBlack = black;
 
         PreviewColor.Color = Color.FromScRgb(1, (float)RgbRed/255, (float)RgbGreen/255, (float)RgbBlue/255);
-
 
         isChanging = false;
     }

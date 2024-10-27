@@ -8,9 +8,9 @@ namespace Paint_Clone.ColorSpacesMode.Utils
         {
             int max = Math.Max(red, Math.Max(green, blue));
             if (max == 0)
-                return (0, 0, 0, 100); // Zwraca czarny
+                return (0, 0, 0, 100); 
 
-            double black = 1.0 - max / 255.0; // Zmiana na double
+            double black = 1.0 - max / 255.0; 
             double c = (1.0 - red / 255.0 - black) / (1.0 - black) * 100;
             double m = (1.0 - green / 255.0 - black) / (1.0 - black) * 100;
             double y = (1.0 - blue / 255.0 - black) / (1.0 - black) * 100;
@@ -20,43 +20,41 @@ namespace Paint_Clone.ColorSpacesMode.Utils
 
         public static (int hue, int saturation, int value) FromCmykToHSV(int cyan, int magenta, int yellow, int black)
         {
-            // Przeliczenie CMYK na RGB
             double r = 255 * (1 - cyan / 100.0) * (1 - black / 100.0);
             double g = 255 * (1 - magenta / 100.0) * (1 - black / 100.0);
             double b = 255 * (1 - yellow / 100.0) * (1 - black / 100.0);
 
-            // Normalizacja
-            double rNorm = r / 255.0;
-            double gNorm = g / 255.0;
-            double bNorm = b / 255.0;
+            r = r / 255;
+            g = g / 255;
+            b = b / 255;
 
-            double max = Math.Max(rNorm, Math.Max(gNorm, bNorm));
-            double min = Math.Min(rNorm, Math.Min(gNorm, bNorm));
-            double delta = max - min;
+            double cmax = Math.Max(r, Math.Max(g, b));
+            double cmin = Math.Min(r, Math.Min(g, b));
+            double diff = cmax - cmin;
+            double h = -1, s = -1;
 
-            // Obliczanie Hue
-            int hue = 0;
-            if (delta > 0)
-            {
-                if (max == rNorm)
-                    hue = (int)(60 * ((gNorm - bNorm) / delta) % 6);
-                else if (max == gNorm)
-                    hue = (int)(60 * ((bNorm - rNorm) / delta) + 120);
-                else if (max == bNorm)
-                    hue = (int)(60 * ((rNorm - gNorm) / delta) + 240);
-            }
+            if (cmax == cmin) 
+                h = 0;
 
-            // Upewnienie się, że hue jest w odpowiednim zakresie
-            if (hue < 0)
-                hue += 360;
+            else if (cmax == r) 
+                h = (60 * ((g - b) / diff) + 360) % 360;
 
-            // Obliczanie Saturation
-            int saturation = (max == 0) ? 0 : (int)((delta / max) * 100);
+            else if (cmax == g)
+                h = (60 * ((b - r) / diff) + 120) % 360;
 
-            // Obliczanie Value
-            int value = (int)(max * 100);
+            else if (cmax == b)
+                h = (60 * ((r - g) / diff) + 240) % 360;
 
-            return (hue, saturation, value);
+            if (cmax == 0)
+                s = 0;
+
+            else
+                s = (diff / cmax) * 100;
+
+            double v = cmax * 100;
+
+            return ((int)h, (int)s, (int)v);
+
         }
 
 
@@ -67,7 +65,7 @@ namespace Paint_Clone.ColorSpacesMode.Utils
             double s = saturation / 100.0;
             double v = value / 100.0;
 
-            double c = v * s; // Chroma
+            double c = v * s;
             double x = c * (1 - Math.Abs((hue / 60.0) % 2 - 1));
             double m = v - c;
 
@@ -84,13 +82,6 @@ namespace Paint_Clone.ColorSpacesMode.Utils
             }
 
             return ((int)((result.r + m) * 255), (int)((result.g + m) * 255), (int)((result.b + m) * 255));
-        }
-
-        private static int Clamp(int value, int min, int max)
-        {
-            if (value < min) return min;
-            if (value > max) return max;
-            return value;
         }
     }
 }
