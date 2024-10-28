@@ -135,23 +135,172 @@
         </Grid>
 
         <!-- RGB CUBE VIEWPORT -->
-        <Viewport3D Grid.Row="2" Grid.ColumnSpan="2" Margin="10">
-            
+        <Viewport3D Grid.Row="2" Grid.ColumnSpan="4" Margin="220,20,220,20" x:Name="CubeViewPort"
+            MouseLeftButtonDown="Viewport_MouseLeftButtonDown"
+            MouseMove="Viewport_MouseMove"
+            MouseLeftButtonUp="Viewport_MouseLeftButtonUp"
+            MouseDown="Viewport_MouseDown"
+            MouseRightButtonDown="Viewport_MouseRightButtonDown"
+            Panel.ZIndex="2" >
+            <Viewport3D.Camera>
+                <PerspectiveCamera x:Name="Camera"
+      Position="0,0,5" LookDirection="0,0,-5" UpDirection="0,1,0"/>
+            </Viewport3D.Camera>
+            <ModelVisual3D>
+                <ModelVisual3D.Content>
+                    <Model3DGroup>
+                        <PointLight Position="0,0,10" Color="White"/>
+                        <Model3DGroup x:Name="Group">
+                            <GeometryModel3D x:Name="BackModel">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="-0.5,-0.5,-0.5  0.5,-0.5,-0.5  -0.5,0.5,-0.5  0.5,0.5,-0.5"
+                TriangleIndices="0,2,1  1,2,3"
+                TextureCoordinates="0,0  1,0  0,1  1,1"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush x:Name="BackBrush"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+
+                            <GeometryModel3D x:Name="LeftModel">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="-0.5,-0.5,-0.5  -0.5,-0.5,0.5  -0.5,0.5,-0.5  -0.5,0.5,0.5"
+                TriangleIndices="0,1,2  2,1,3"
+                TextureCoordinates="0,0  1,0  0,1  1,1"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush x:Name="LeftBrush"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+
+                            <GeometryModel3D x:Name="BottomModel">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="-0.5,-0.5,-0.5  0.5,-0.5,-0.5  -0.5,-0.5,0.5  0.5,-0.5,0.5"
+                TriangleIndices="0,1,2  1,3,2"
+                TextureCoordinates="0,0  1,0  0,1  1,1"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush x:Name="BottomBrush"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+
+                            <GeometryModel3D x:Name="RightModel">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="0.5,-0.5,-0.5  0.5,0.5,0.5  0.5,-0.5,0.5  0.5,0.5,-0.5"
+                TriangleIndices="0,1,2  0,3,1"
+                TextureCoordinates="0,0  1,1  1,0  0,1"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush x:Name="RightBrush"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+
+                            <GeometryModel3D x:Name="FrontModel">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="-0.5,-0.5,0.5  0.5,-0.5,0.5  -0.5,0.5,0.5  0.5,0.5,0.5"
+                TriangleIndices="0,1,2  3,2,1"
+                TextureCoordinates="0,0  1,0  0,1  1,1"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush x:Name="FrontBrush"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+
+                            <GeometryModel3D x:Name="TopModel">
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="-0.5,0.5,-0.5  -0.5,0.5,0.5  0.5,0.5,-0.5  0.5,0.5,0.5"
+                TriangleIndices="0,1,2  2,1,3"
+                TextureCoordinates="0,0  0,1  1,0  1,1"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial>
+                                        <DiffuseMaterial.Brush>
+                                            <ImageBrush x:Name="TopBrush"/>
+                                        </DiffuseMaterial.Brush>
+                                    </DiffuseMaterial>
+                                </GeometryModel3D.Material>
+                            </GeometryModel3D>
+
+                            <GeometryModel3D>
+                                <GeometryModel3D.Geometry>
+                                    <MeshGeometry3D
+                Positions="0,-0.5,-0.5  0,0.5,-0.5  0,-0.5,0.5  0,0.5,0.5"
+                TriangleIndices="0,1,2  2,1,3"/>
+                                </GeometryModel3D.Geometry>
+                                <GeometryModel3D.Transform>
+                                    <Transform3DGroup>
+                                        <ScaleTransform3D CenterX="0" CenterY="0" CenterZ="0"
+                  x:Name="IndicatorScale"/>
+                                        <RotateTransform3D>
+                                            <RotateTransform3D.Rotation>
+                                                <AxisAngleRotation3D x:Name="IndicatorRotationX" Axis="1,0,0"/>
+                                            </RotateTransform3D.Rotation>
+                                        </RotateTransform3D>
+                                        <RotateTransform3D>
+                                            <RotateTransform3D.Rotation>
+                                                <AxisAngleRotation3D x:Name="IndicatorRotationY" Axis="0,1,0"/>
+                                            </RotateTransform3D.Rotation>
+                                        </RotateTransform3D>
+                                        <RotateTransform3D>
+                                            <RotateTransform3D.Rotation>
+                                                <AxisAngleRotation3D x:Name="IndicatorRotationZ" Axis="0,0,1"/>
+                                            </RotateTransform3D.Rotation>
+                                        </RotateTransform3D>
+                                        <TranslateTransform3D x:Name="IndicatorTranslation"/>
+                                    </Transform3DGroup>
+                                </GeometryModel3D.Transform>
+                                <GeometryModel3D.Material>
+                                    <DiffuseMaterial Brush="White"/>
+                                </GeometryModel3D.Material>
+                                <GeometryModel3D.BackMaterial>
+                                    <DiffuseMaterial Brush="White"/>
+                                </GeometryModel3D.BackMaterial>
+                            </GeometryModel3D>
+
+                            <Model3DGroup.Transform>
+                                <Transform3DGroup>
+                                    <RotateTransform3D>
+                                        <RotateTransform3D.Rotation>
+                                            <AxisAngleRotation3D x:Name="RotationX" Axis="1,0,0"/>
+                                        </RotateTransform3D.Rotation>
+                                    </RotateTransform3D>
+                                    <RotateTransform3D>
+                                        <RotateTransform3D.Rotation>
+                                            <AxisAngleRotation3D x:Name="RotationY" Axis="0,1,0"/>
+                                        </RotateTransform3D.Rotation>
+                                    </RotateTransform3D>
+                                </Transform3DGroup>
+                            </Model3DGroup.Transform>
+                        </Model3DGroup>
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
         </Viewport3D>
-
-        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="10" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Tutaj będzie kostka rgb
-        </TextBlock>
-        
-        <!-- HSV CONE VIEWPORT -->
-        <Viewport3D Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
-
-        </Viewport3D>
-
-        <TextBlock Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
-            Tutaj będzie stożek hsv
-        </TextBlock>
-
-
     </Grid>
 </UserControl>
