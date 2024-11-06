@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Paint_Clone.BasicDrawingMode.Views;
 using Paint_Clone.ColorSpacesMode.Views;
+using Paint_Clone.FileFormatsMode.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,4 +31,7 @@ public partial class MainWindowViewModel: ObservableObject
 
     [RelayCommand]
     void ShowColorSpacesView() => CurrentView = serviceProvider.GetRequiredService<ColorSpacesView>();
+
+    [RelayCommand]
+    void ShowFileFormatsView() => CurrentView = serviceProvider.GetRequiredService<FileFormatsView>();
 }

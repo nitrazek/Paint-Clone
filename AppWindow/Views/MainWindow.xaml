@@ -36,7 +36,7 @@
             </Grid.ColumnDefinitions>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowBasicDrawingViewCommand}" IsChecked="True">Basic Drawing</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowColorSpacesViewCommand}" Grid.Column="1">Color Spaces</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="2" IsEnabled="False">File Formats</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowFileFormatsViewCommand}" Grid.Column="2">File Formats</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="3" IsEnabled="False">Digital Filters</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="4" IsEnabled="False">Morphological Filters</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="5" IsEnabled="False">Bézier Curve and transform</RadioButton>
