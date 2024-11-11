@@ -42,7 +42,7 @@
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="5" IsEnabled="False">Bézier Curve and transform</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="6" IsEnabled="False">Image analysis</RadioButton>
         </Grid>
-        <Rectangle Grid.Row="1" Fill="Black"/>
+        <Rectangle Grid.Row="1" Fill="Black" Panel.ZIndex="1"/>
         <ContentControl Grid.Row="2" Content="{Binding CurrentView}"/>
     </Grid>
 </Window>

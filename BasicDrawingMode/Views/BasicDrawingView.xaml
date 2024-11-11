@@ -133,13 +133,13 @@
                 <TextBox Width="130" Text="{Binding TextField, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="3" Margin="4,8,4,4" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Margin="0,0,7,0" VerticalAlignment="Center" Foreground="#ffca4f" FontWeight="Bold" FontSize="13">Rozmiar:</TextBlock>
+                <TextBlock Margin="0,0,7,0" VerticalAlignment="Center" Foreground="#ffca4f" FontWeight="Bold" FontSize="13">Size:</TextBlock>
                 <Button Content="▲" Width="30" Margin="5" Command="{Binding IncreaseBrushSizeCommand}" Style="{StaticResource DefaultButtonStyle}"/>
                 <TextBlock Width="50" TextAlignment="Center" Foreground="#ffca4f" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="15" Text="{Binding BrushSize}"/>
                 <Button Content="▼" Width="30" Margin="5" Command="{Binding DecreaseBrushSizeCommand}" Style="{StaticResource DefaultButtonStyle}"/>
             </StackPanel>
-            <Button Grid.Row="4" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center" Click="SaveButton_Click" Style="{StaticResource DefaultButtonStyle}">Zapisz</Button>
-            <Button Grid.Row="5" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click" Style="{StaticResource DefaultButtonStyle}">Wyczyść</Button>
+            <Button Grid.Row="4" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,8,4,4" VerticalAlignment="Center" Click="SaveButton_Click" Style="{StaticResource DefaultButtonStyle}">Save</Button>
+            <Button Grid.Row="5" Grid.ColumnSpan="3" FontSize="18" Height="40" Margin="4,4,4,8" VerticalAlignment="Center" Click="ClearButton_Click" Style="{StaticResource DefaultButtonStyle}">Clear</Button>
         </Grid>
         <Grid Grid.Column="1" Panel.ZIndex="0">
             <Canvas Name="PaintSurface" MouseLeftButtonDown="PaintSurface_MouseLeftButtonDown" MouseLeftButtonUp="PaintSurface_MouseLeftButtonUp" MouseMove="PaintSurface_MouseMove">
