@@ -1,5 +1,4 @@
-﻿using Paint_Clone.FileFormatsMode.Utils;
-using Paint_Clone.FileFormatsMode.Viewmodels;
+﻿using Paint_Clone.DigitalFiltersMode.Viewmodels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,30 +15,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Paint_Clone.FileFormatsMode.Views;
+namespace Paint_Clone.DigitalFiltersMode.Views;
 
-public partial class FileFormatsView : UserControl
+public partial class DigitalFiltersView : UserControl
 {
-    TaskQueue taskQueue;
-    FileFormatsViewModel viewModel;
+    DigitalFiltersViewModel viewModel;
     Point origin;
     Point start;
 
-    public FileFormatsView(FileFormatsViewModel viewModel)
+    public DigitalFiltersView(DigitalFiltersViewModel viewModel)
     {
         InitializeComponent();
         DataContext = this.viewModel = viewModel;
-        taskQueue = new(Dispatcher);
     }
 
     private void LoadButton_Click(object sender, RoutedEventArgs e)
     {
-        taskQueue.EnqueueTask(viewModel.LoadFile);
-    }
-
-    private void SaveButton_Click(object sender, RoutedEventArgs e)
-    {
-        taskQueue.EnqueueTask(viewModel.SaveFile);
+        viewModel.LoadFile();
     }
 
     private void Window_MouseWheel(object sender, MouseWheelEventArgs e)

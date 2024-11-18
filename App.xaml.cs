@@ -5,6 +5,8 @@ using Paint_Clone.BasicDrawingMode.ViewModels;
 using Paint_Clone.BasicDrawingMode.Views;
 using Paint_Clone.ColorSpacesMode.ViewModels;
 using Paint_Clone.ColorSpacesMode.Views;
+using Paint_Clone.DigitalFiltersMode.Viewmodels;
+using Paint_Clone.DigitalFiltersMode.Views;
 using Paint_Clone.FileFormatsMode.Viewmodels;
 using Paint_Clone.FileFormatsMode.Views;
 using System.Configuration;
@@ -32,11 +34,13 @@ public partial class App : Application
         services.AddSingleton<BasicDrawingView>();
         services.AddSingleton<ColorSpacesView>();
         services.AddSingleton<FileFormatsView>();
+        services.AddSingleton<DigitalFiltersView>();
 
         //Viewmodels
         services.AddSingleton<MainWindowViewModel>();
         services.AddSingleton<BasicDrawingViewModel>();
         services.AddSingleton<ColorSpaceViewModel>();
         services.AddSingleton<FileFormatsViewModel>();
+        services.AddSingleton<DigitalFiltersViewModel>();
     }
 }

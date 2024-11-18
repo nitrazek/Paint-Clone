@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Paint_Clone.BasicDrawingMode.Views;
 using Paint_Clone.ColorSpacesMode.Views;
+using Paint_Clone.DigitalFiltersMode.Views;
 using Paint_Clone.FileFormatsMode.Views;
 using System;
 using System.Collections.Generic;
@@ -34,4 +35,7 @@ public partial class MainWindowViewModel: ObservableObject
 
     [RelayCommand]
     void ShowFileFormatsView() => CurrentView = serviceProvider.GetRequiredService<FileFormatsView>();
+
+    [RelayCommand]
+    void ShowDigitalFiltersView() => CurrentView = serviceProvider.GetRequiredService<DigitalFiltersView>();
 }

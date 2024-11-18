@@ -79,5 +79,12 @@
         </Setter>
     </Style>
 
+    <Style x:Key="CustomRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="#FFCA4F" />
+        <Setter Property="Padding" Value="5,0,0,0" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
 
 </ResourceDictionary>
