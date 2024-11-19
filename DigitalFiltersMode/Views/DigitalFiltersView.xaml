@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vms="clr-namespace:Paint_Clone.DigitalFiltersMode.Viewmodels"
              xmlns:local="clr-namespace:Paint_Clone.DigitalFiltersMode.Views"
+             xmlns:enums="clr-namespace:Paint_Clone.DigitalFiltersMode.Enums"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="675" d:DesignWidth="1280"
@@ -29,22 +30,22 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" FontSize="18" Height="40" Margin="4,4,4,4" VerticalAlignment="Center" Click="LoadButton_Click" Style="{StaticResource DefaultButtonStyle}">Load image</Button>
+            <Button Grid.Row="0" FontSize="18" Height="40" Margin="9,4,9,4" VerticalAlignment="Center" Click="LoadButton_Click" Style="{StaticResource DefaultButtonStyle}">Load image</Button>
 
             <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0" Panel.ZIndex="1">
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Addition"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Substact"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Multiply"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Divide"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Brightness"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Gray Scale (RGB Average)"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Gray Scale (RGB Max)"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Smoothing"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Median"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Edge Detection (Sobel)"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="High-pass Sharpening"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Gaussian Blur"/>
-                <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Mask Convolution"/>
+                <RadioButton x:Name="AdditionRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Addition" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Addition}" IsChecked="True" />
+                <RadioButton x:Name="SubstractRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Substact" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Substract}"/>
+                <RadioButton x:Name="MultiplyRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Multiply" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Multiply}"/>
+                <RadioButton x:Name="DivideRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Divide" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Divide}"/>
+                <RadioButton x:Name="BrightnessRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Brightness" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Brightness}"/>
+                <RadioButton x:Name="GrayScaleAverageRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Gray Scale (RGB Average)" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.GrayScaleAverage}"/>
+                <RadioButton x:Name="GrayScaleMaxRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Gray Scale (RGB Max)" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.GrayScaleMax}"/>
+                <RadioButton x:Name="SmoothingRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Smoothing" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Smoothing}"/>
+                <RadioButton x:Name="MedianRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Median" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Median}"/>
+                <RadioButton x:Name="SobelRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Edge Detection (Sobel)" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Sobel}"/>
+                <RadioButton x:Name="HighPassRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="High-pass Sharpening" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.HighPass}"/>
+                <RadioButton x:Name="GaussianRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Gaussian Blur" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Gaussian}"/>
+                <RadioButton x:Name="MaskRadioButton" GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Mask Convolution" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Mask}" Margin="0,0,0,10"/>
 
 
                 <Grid Margin="5">
@@ -64,7 +65,27 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Addition}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Substract}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Multiply}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Divide}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
                     <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" VerticalAlignment="Center">Preview:</TextBlock>
 
                     <Rectangle Grid.Column="1" x:Name="ColorRectangle" Margin="5,10,5,10" Height="20" Fill="{Binding PreviewColor}"/>
@@ -81,13 +102,35 @@
                     <TextBox Grid.Row="5" Margin="5" Grid.Column="1" Text="{Binding RgbBlue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <Slider Margin="5" Grid.Row="6" Grid.Column="1" Minimum="0" Maximum="255" Value="{Binding RgbBlue, Mode=TwoWay}"></Slider>
 
-                    <TextBlock Foreground="#ffca4f" FontWeight="Bold" Grid.Row="7" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Brightness:</TextBlock>
-                    <TextBox Grid.Row="7" Margin="5" Grid.Column="1" Text="{Binding RgbBlue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                    <Slider Margin="5" Grid.Row="8" Grid.Column="1" Minimum="-100" Maximum="100" Value="{Binding Brightness, Mode=TwoWay}"></Slider>
                 </Grid>
-                    
-                <Button Grid.Row="0" FontSize="18" Height="40" Margin="4,4,4,4" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}">Apply</Button>
-                <Button Grid.Row="0" FontSize="18" Height="40" Margin="4,4,4,4" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}">Save image</Button>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Brightness}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Brightness:</TextBlock>
+                    <TextBox Grid.Row="0" Margin="5" Grid.Column="1" Text="{Binding RgbBlue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <Slider Margin="5" Grid.Row="1" Grid.Column="1" Minimum="-100" Maximum="100" Value="{Binding Brightness, Mode=TwoWay}"></Slider>
+                </Grid>
+
+                <Button Grid.Row="0" FontSize="18" Height="40" Margin="0,4,0,4" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}" Click="Apply_Button_Click">Apply</Button>
+                <Button Grid.Row="0" FontSize="18" Height="40" Margin="0,4,0,4" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}">Save image</Button>
 
             </StackPanel>
         </Grid>

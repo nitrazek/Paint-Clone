@@ -34,6 +34,16 @@ public partial class DigitalFiltersView : UserControl
         viewModel.LoadFile();
     }
 
+    private void Apply_Button_Click(object sender, RoutedEventArgs e)
+    {
+        viewModel.ApplyFilters();
+    }
+
+    private void Save_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
     private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
     {
         Point p = e.GetPosition(Image);
