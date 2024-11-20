@@ -223,7 +223,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplyAdditionFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyAdditionFilter(byte[] pixelData, int width, int height, int stride)
     {
         for (int i = 0; i < pixelData.Length; i += 4) // ARGB
         {
@@ -236,7 +236,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         RgbBlue = 0;
     }
 
-    private void ApplySubtractionFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplySubtractionFilter(byte[] pixelData, int width, int height, int stride)
     {
         for (int i = 0; i < pixelData.Length; i += 4) // ARGB
         {
@@ -248,7 +248,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         RgbGreen = 0;
         RgbBlue = 0;
     }
-    private void ApplyMultiplicationFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyMultiplicationFilter(byte[] pixelData, int width, int height, int stride)
     {
         for (int i = 0; i < pixelData.Length; i += 4) // ARGB
         {
@@ -261,7 +261,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         RgbBlue = 0;
     }
 
-    private void ApplyDivisionFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyDivisionFilter(byte[] pixelData, int width, int height, int stride)
     {
         for (int i = 0; i < pixelData.Length; i += 4) // ARGB
         {
@@ -275,7 +275,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     }
 
-    private void ApplyBrightnessFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyBrightnessFilter(byte[] pixelData, int width, int height, int stride)
     {
         // Obliczamy czynnik jasności w zakresie od -1.0 do 1.0
         double brightnessFactor = Brightness / 100.0;
@@ -290,7 +290,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         Brightness = 0;
     }
 
-    private void ApplyGrayscaleAverageFilter(byte[] pixelData)
+    public void ApplyGrayscaleAverageFilter(byte[] pixelData)
     {
         for (int i = 0; i < pixelData.Length; i += 4) // ARGB
         {
@@ -301,7 +301,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplyGrayscaleMaxFilter(byte[] pixelData)
+    public void ApplyGrayscaleMaxFilter(byte[] pixelData)
     {
         for (int i = 0; i < pixelData.Length; i += 4) // ARGB
         {
@@ -312,7 +312,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplySmoothingFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplySmoothingFilter(byte[] pixelData, int width, int height, int stride)
     {
         int kernelSize = 3; // Rozmiar maski (3x3)
         int radius = kernelSize / 2;
@@ -344,7 +344,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplyMedianFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyMedianFilter(byte[] pixelData, int width, int height, int stride)
     {
         int kernelSize = 3; // Rozmiar maski (3x3)
         int radius = kernelSize / 2;
@@ -381,7 +381,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplySobelFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplySobelFilter(byte[] pixelData, int width, int height, int stride)
     {
         int[,] gx = new int[3, 3] { { -1, 0, 1 }, { -2, 0, 2 }, { -1, 0, 1 } };
         int[,] gy = new int[3, 3] { { -1, -2, -1 }, { 0, 0, 0 }, { 1, 2, 1 } };
@@ -433,7 +433,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
     }
 
 
-    private void ApplyHighPassFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyHighPassFilter(byte[] pixelData, int width, int height, int stride)
     {
         byte[] copy = (byte[])pixelData.Clone();
         int[,] kernel = {
@@ -469,7 +469,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplyGaussianFilter(byte[] pixelData, int width, int height, int stride)
+    public void ApplyGaussianFilter(byte[] pixelData, int width, int height, int stride)
     {
         byte[] copy = (byte[])pixelData.Clone();
         double[,] kernel = {
@@ -506,7 +506,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         }
     }
 
-    private void ApplyMaskFilter(byte[] pixelData, int width, int height, int stride, double[,] kernel, double kernelSum)
+    public void ApplyMaskFilter(byte[] pixelData, int width, int height, int stride, double[,] kernel, double kernelSum)
     {
         byte[] copy = (byte[])pixelData.Clone();
         int kernelSize = kernel.GetLength(0);

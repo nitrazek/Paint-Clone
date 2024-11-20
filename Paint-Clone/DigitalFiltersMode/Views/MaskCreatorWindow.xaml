@@ -29,14 +29,14 @@
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="3" Grid.RowSpan="2" Background="#36393e"/>
         <Label Grid.Column="0" Grid.Row="0" Content="Wiersze" Foreground="#FFCA4F" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <Button Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Content="-" Click="RowMinus_Click"/>
-        <Button Style="{StaticResource DefaultButtonStyle}" Grid.Column="2" Grid.Row="0" Content="+" Click="RowPlus_Click"/>
+        <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="1" Grid.Row="0" Content="-" Click="RowMinus_Click"/>
+        <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="2" Grid.Row="0" Content="+" Click="RowPlus_Click"/>
 
         <Label Grid.Column="0" Grid.Row="1" Content="Kolumny" Foreground="#FFCA4F" FontWeight="Bold" HorizontalAlignment="Center"/>
-        <Button Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="1" Content="-" Click="ColumnMinus_Click"/>
-        <Button Style="{StaticResource DefaultButtonStyle}" Grid.Column="2" Grid.Row="1" Content="+" Click="ColumnPlus_Click"/>
+        <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="1" Grid.Row="1" Content="-" Click="ColumnMinus_Click"/>
+        <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="2" Grid.Row="1" Content="+" Click="ColumnPlus_Click"/>
 
-        <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" x:Name="MaskGrid">
+        <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" x:Name="MaskGrid" Background="LightGray">
             <Grid.Resources>
                 <Style TargetType="TextBox">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -45,7 +45,7 @@
             </Grid.Resources>
         </Grid>
         <Grid Grid.ColumnSpan="3" Grid.Row="3" Background="#36393e"/>
-        <Button Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="3" Content="Anuluj" Click="Cancel_Click" IsCancel="True"/>
-        <Button Style="{StaticResource DefaultButtonStyle}" Grid.Column="2" Grid.Row="3" Content="OK" Click="OK_Click" IsDefault="True"/>
+        <Button Style="{StaticResource DefaultButtonStyle}" Margin="125,0,125,0" Grid.Column="1" Grid.Row="3" Content="Anuluj" Click="Cancel_Click" IsCancel="True"/>
+        <Button Style="{StaticResource DefaultButtonStyle}" Margin="125,0,125,0" Grid.Column="2" Grid.Row="3" Content="OK" Click="OK_Click" IsDefault="True"/>
     </Grid>
 </Window>
