@@ -13,6 +13,7 @@ using Paint_Clone.FileFormatsMode.Utils;
 using System.Windows.Media;
 using Paint_Clone.DigitalFiltersMode.Enums;
 using Paint_Clone.ColorSpacesMode.Utils;
+using Projekt_4;
 
 namespace Paint_Clone.DigitalFiltersMode.Viewmodels;
 
@@ -204,8 +205,18 @@ public partial class DigitalFiltersViewModel : ObservableObject
                     break;
 
                 case FilterMode.Mask:
-                    double[,] customKernel = { { 0, -1, 0 }, { -1, 4, -1 }, { 0, -1, 0 } }; // Przykładowa maska
-                    ApplyMaskFilter(pixelData, width, height, stride, customKernel, 1.0);
+                    MaskCreatorWindow window = new MaskCreatorWindow();
+                    bool? dialogResult = window.ShowDialog();
+                    if (dialogResult == true && window.Mask != null)
+                    {
+                        double[,] customKernel = window.Mask;
+                        ApplyMaskFilter(pixelData, width, height, stride, customKernel, 1.0);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Operacja została anulowana lub dane nie są poprawne.",
+                                        "Informacja", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                     break;
 
                 default:
@@ -225,7 +236,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplyAdditionFilter(byte[] pixelData, int width, int height, int stride)
     {
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4) 
         {
             pixelData[i] = (byte)Math.Min(pixelData[i] + RgbBlue, 255);  // Blue
             pixelData[i + 1] = (byte)Math.Min(pixelData[i + 1] + RgbGreen, 255); // Green
@@ -238,7 +249,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplySubtractionFilter(byte[] pixelData, int width, int height, int stride)
     {
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4)
         {
             pixelData[i] = (byte)Math.Max(pixelData[i] - RgbBlue, 0);  // Blue
             pixelData[i + 1] = (byte)Math.Max(pixelData[i + 1] - RgbGreen, 0); // Green
@@ -250,7 +261,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
     }
     public void ApplyMultiplicationFilter(byte[] pixelData, int width, int height, int stride)
     {
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4)
         {
             pixelData[i] = (byte)Math.Min(pixelData[i] * RgbBlue / 255, 255);  // Blue
             pixelData[i + 1] = (byte)Math.Min(pixelData[i + 1] * RgbGreen / 255, 255); // Green
@@ -263,7 +274,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplyDivisionFilter(byte[] pixelData, int width, int height, int stride)
     {
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4)
         {
             pixelData[i] = (byte)Math.Min(pixelData[i] / Math.Max(RgbBlue, 1), 255);  // Blue
             pixelData[i + 1] = (byte)Math.Min(pixelData[i + 1] / Math.Max(RgbGreen, 1), 255); // Green
@@ -277,12 +288,10 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplyBrightnessFilter(byte[] pixelData, int width, int height, int stride)
     {
-        // Obliczamy czynnik jasności w zakresie od -1.0 do 1.0
         double brightnessFactor = Brightness / 100.0;
 
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4) 
         {
-            // Zmiana jasności dla każdej składowej RGB
             pixelData[i] = (byte)Math.Clamp(pixelData[i] * (1 + brightnessFactor), 0, 255);      // Blue
             pixelData[i + 1] = (byte)Math.Clamp(pixelData[i + 1] * (1 + brightnessFactor), 0, 255); // Green
             pixelData[i + 2] = (byte)Math.Clamp(pixelData[i + 2] * (1 + brightnessFactor), 0, 255); // Red
@@ -292,9 +301,9 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplyGrayscaleAverageFilter(byte[] pixelData)
     {
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4) 
         {
-            byte gray = (byte)((pixelData[i] + pixelData[i + 1] + pixelData[i + 2]) / 3); // Średnia
+            byte gray = (byte)((pixelData[i] + pixelData[i + 1] + pixelData[i + 2]) / 3);
             pixelData[i] = gray;   // Blue
             pixelData[i + 1] = gray; // Green
             pixelData[i + 2] = gray; // Red
@@ -303,9 +312,9 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplyGrayscaleMaxFilter(byte[] pixelData)
     {
-        for (int i = 0; i < pixelData.Length; i += 4) // ARGB
+        for (int i = 0; i < pixelData.Length; i += 4)
         {
-            byte gray = Math.Max(pixelData[i], Math.Max(pixelData[i + 1], pixelData[i + 2])); // Max z RGB
+            byte gray = Math.Max(pixelData[i], Math.Max(pixelData[i + 1], pixelData[i + 2])); 
             pixelData[i] = gray;   // Blue
             pixelData[i + 1] = gray; // Green
             pixelData[i + 2] = gray; // Red
@@ -314,7 +323,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplySmoothingFilter(byte[] pixelData, int width, int height, int stride)
     {
-        int kernelSize = 3; // Rozmiar maski (3x3)
+        int kernelSize = 3;
         int radius = kernelSize / 2;
         byte[] copy = (byte[])pixelData.Clone();
 
@@ -346,7 +355,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
 
     public void ApplyMedianFilter(byte[] pixelData, int width, int height, int stride)
     {
-        int kernelSize = 3; // Rozmiar maski (3x3)
+        int kernelSize = 3; 
         int radius = kernelSize / 2;
         byte[] copy = (byte[])pixelData.Clone();
 
@@ -391,7 +400,6 @@ public partial class DigitalFiltersViewModel : ObservableObject
         {
             for (int x = 1; x < width - 1; x++)
             {
-                // Sobel dla każdego kanału kolorów (R, G, B)
                 int gxBlue = 0, gyBlue = 0;
                 int gxGreen = 0, gyGreen = 0;
                 int gxRed = 0, gyRed = 0;
@@ -413,17 +421,14 @@ public partial class DigitalFiltersViewModel : ObservableObject
                     }
                 }
 
-                // Obliczenie gradientu dla każdego kanału
                 int magnitudeBlue = (int)Math.Sqrt(gxBlue * gxBlue + gyBlue * gyBlue);
                 int magnitudeGreen = (int)Math.Sqrt(gxGreen * gxGreen + gyGreen * gyGreen);
                 int magnitudeRed = (int)Math.Sqrt(gxRed * gxRed + gyRed * gyRed);
 
-                // Ograniczenie wartości w zakresie 0-255
                 byte blue = (byte)Math.Clamp(magnitudeBlue, 0, 255);
                 byte green = (byte)Math.Clamp(magnitudeGreen, 0, 255);
                 byte red = (byte)Math.Clamp(magnitudeRed, 0, 255);
 
-                // Zapisanie wyników w obrazie wyjściowym
                 int centerIdx = (y * stride) + (x * 4);
                 pixelData[centerIdx] = blue;   // Blue
                 pixelData[centerIdx + 1] = green; // Green
@@ -477,7 +482,7 @@ public partial class DigitalFiltersViewModel : ObservableObject
         { 2, 4, 2 },
         { 1, 2, 1 }
     };
-        double kernelSum = 16.0; // Suma wag kernela
+        double kernelSum = 16.0; 
 
         for (int y = 1; y < height - 1; y++)
         {

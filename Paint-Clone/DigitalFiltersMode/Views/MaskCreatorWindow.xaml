@@ -28,11 +28,11 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.ColumnSpan="3" Grid.RowSpan="2" Background="#36393e"/>
-        <Label Grid.Column="0" Grid.Row="0" Content="Wiersze" Foreground="#FFCA4F" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="0" Content="Wiersze" Foreground="#FFCA4F" FontWeight="Bold" HorizontalAlignment="Center" FontFamily="Comic Sans MS"/>
         <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="1" Grid.Row="0" Content="-" Click="RowMinus_Click"/>
         <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="2" Grid.Row="0" Content="+" Click="RowPlus_Click"/>
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Kolumny" Foreground="#FFCA4F" FontWeight="Bold" HorizontalAlignment="Center"/>
+        <Label Grid.Column="0" Grid.Row="1" Content="Kolumny" Foreground="#FFCA4F" FontWeight="Bold" HorizontalAlignment="Center" FontFamily="Comic Sans MS"/>
         <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="1" Grid.Row="1" Content="-" Click="ColumnMinus_Click"/>
         <Button Style="{StaticResource DefaultButtonStyle}" Margin="170,0,170,0" Grid.Column="2" Grid.Row="1" Content="+" Click="ColumnPlus_Click"/>
 

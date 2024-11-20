@@ -7,7 +7,7 @@ namespace Projekt_4
     public partial class MaskCreatorWindow : Window
     {
         public bool Status { get; private set; } = false;
-        public double[] Mask { get; private set; } = null;
+        public double[,] Mask { get; private set; } = null;
         public int MaskWidth { get; private set; } = 0;
         public int MaskHeight { get; private set; } = 0;
 
@@ -125,21 +125,27 @@ namespace Projekt_4
         {
             MaskWidth = MaskGrid.ColumnDefinitions.Count;
             MaskHeight = MaskGrid.RowDefinitions.Count;
-            Mask = new double[MaskWidth * MaskHeight];
+
+            Mask = new double[MaskHeight, MaskWidth];
+
             var chn = MaskGrid.Children;
             foreach (var c in chn)
             {
                 if (!(c is TextBox)) continue;
+
                 var tb = (TextBox)c;
                 var row = Grid.GetRow(tb);
                 var col = Grid.GetColumn(tb);
+
                 if (!double.TryParse(tb.Text, out double val))
                 {
                     MessageBox.Show($"Podaj poprawną wartość w wierszu {row} i kolumnie {col}.");
                     return;
                 }
-                Mask[col + MaskWidth * row] = val;
+
+                Mask[row, col] = val;
             }
+
             Status = true;
             Close();
         }
