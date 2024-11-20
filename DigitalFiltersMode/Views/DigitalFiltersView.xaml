@@ -125,7 +125,7 @@
                     </Grid.Style>
 
                     <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Brightness:</TextBlock>
-                    <TextBox Grid.Row="0" Margin="5" Grid.Column="1" Text="{Binding RgbBlue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    <TextBox Grid.Row="0" Margin="5" Grid.Column="1" Text="{Binding Brightness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                     <Slider Margin="5" Grid.Row="1" Grid.Column="1" Minimum="-100" Maximum="100" Value="{Binding Brightness, Mode=TwoWay}"></Slider>
                 </Grid>
 
