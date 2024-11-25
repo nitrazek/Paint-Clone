@@ -25,6 +25,9 @@
     <Compile Update="DigitalFiltersMode\Views\DigitalFiltersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MorphologicalFiltersMode\Views\MorphologicalFilrersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

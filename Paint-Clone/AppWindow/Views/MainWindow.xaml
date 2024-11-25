@@ -38,7 +38,7 @@
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowColorSpacesViewCommand}" Grid.Column="1">Color Spaces</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowFileFormatsViewCommand}" Grid.Column="2">File Formats</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowDigitalFiltersViewCommand}" Grid.Column="3">Digital Filters</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="4" IsEnabled="False">Morphological Filters</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowMorphologicalFiltersViewCommand}" Grid.Column="4" >Morphological Filters</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="5" IsEnabled="False">Bézier Curve and transform</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="6" IsEnabled="False">Image analysis</RadioButton>
         </Grid>

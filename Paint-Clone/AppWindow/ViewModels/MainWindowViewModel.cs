@@ -5,6 +5,7 @@ using Paint_Clone.BasicDrawingMode.Views;
 using Paint_Clone.ColorSpacesMode.Views;
 using Paint_Clone.DigitalFiltersMode.Views;
 using Paint_Clone.FileFormatsMode.Views;
+using Paint_Clone.MorphologicalFiltersMode.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,4 +39,6 @@ public partial class MainWindowViewModel: ObservableObject
 
     [RelayCommand]
     void ShowDigitalFiltersView() => CurrentView = serviceProvider.GetRequiredService<DigitalFiltersView>();
+    [RelayCommand]
+    void ShowMorphologicalFiltersView() => CurrentView = serviceProvider.GetRequiredService<MorphologicalFiltersView>();
 }

@@ -9,6 +9,8 @@ using Paint_Clone.DigitalFiltersMode.Viewmodels;
 using Paint_Clone.DigitalFiltersMode.Views;
 using Paint_Clone.FileFormatsMode.Viewmodels;
 using Paint_Clone.FileFormatsMode.Views;
+using Paint_Clone.MorphologicalFiltersMode.Viewmodels;
+using Paint_Clone.MorphologicalFiltersMode.Views;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -35,6 +37,7 @@ public partial class App : Application
         services.AddSingleton<ColorSpacesView>();
         services.AddSingleton<FileFormatsView>();
         services.AddSingleton<DigitalFiltersView>();
+        services.AddSingleton<MorphologicalFiltersView>();
 
         //Viewmodels
         services.AddSingleton<MainWindowViewModel>();
@@ -42,5 +45,6 @@ public partial class App : Application
         services.AddSingleton<ColorSpaceViewModel>();
         services.AddSingleton<FileFormatsViewModel>();
         services.AddSingleton<DigitalFiltersViewModel>();
+        services.AddSingleton<MorphologicalFiltersViewModel>();
     }
 }
