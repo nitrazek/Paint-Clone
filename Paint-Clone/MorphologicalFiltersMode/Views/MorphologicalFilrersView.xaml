@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vms="clr-namespace:Paint_Clone.MorphologicalFiltersMode.Viewmodels"
              xmlns:local="clr-namespace:Paint_Clone.MorphologicalFiltersMode.Views"
+             xmlns:enums="clr-namespace:Paint_Clone.MorphologicalFiltersMode.Enums"
              mc:Ignorable="d" 
              Background="White"
-             d:DesignHeight="675" d:DesignWidth="1280">
+             d:DesignHeight="675" d:DesignWidth="1280"
+             d:DataContext="{d:DesignInstance vms:MorphologicalFiltersViewModel }">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -19,31 +21,120 @@
 
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid Background="#36393e" Grid.Column="0" Panel.ZIndex="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" FontSize="18" Height="40" Margin="9,4,9,4" VerticalAlignment="Center" Click="LoadButton_Click" Style="{StaticResource DefaultButtonStyle}">Load image</Button>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="210"/>
+        <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid Background="#36393e" Grid.Column="0" Panel.ZIndex="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" FontSize="18" Height="40" Margin="9,4,9,4" VerticalAlignment="Center" Click="LoadButton_Click" Style="{StaticResource DefaultButtonStyle}">Load image</Button>
 
-            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0" Panel.ZIndex="1">
-            </StackPanel>
-        </Grid>
-        <Border Grid.Column="1" x:Name="Border">
-            <Image Grid.Column="1" Panel.ZIndex="0" x:Name="Image" MaxHeight="{Binding ImageMaxHeight}" MaxWidth="{Binding ImageMaxWidth}"
-               MouseWheel="Window_MouseWheel" 
-               MouseLeftButtonDown="Image_MouseLeftButtonDown"
-               MouseLeftButtonUp="Image_MouseLeftButtonUp"
-               MouseMove="Image_MouseMove" 
-               RenderOptions.BitmapScalingMode="NearestNeighbor"
-               Source="{Binding ImageBitmapSource}"/>
-        </Border>
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10,0,10,0" Panel.ZIndex="1">
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Histogram Stretching" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Streching}" IsChecked="True"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Histogram Equalization" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Equalization}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Manual Binarization" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Manual}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Percent Black Selection" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.PercentBlackSelection}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Entropy Selection" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.EntropySelection}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Minimum Error" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.MinimumError}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Otsu" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Otsu}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Niblack" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Niblack}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Sauvola" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Sauvola}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Phansalkar" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Phansalkar}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Dilatation" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Dilatation}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Erosion" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Erosion}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Opening" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Opening}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Closing" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Closing}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Thickening" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Thickening}"/>
+                <RadioButton GroupName="ToogleFilterModeGroup" Style="{StaticResource CustomRadioButtonStyle}" Content="Thinning" Command="{Binding ChangeFilterModeCommand}" CommandParameter="{x:Static enums:FilterMode.Thinning}" Margin="0,0,0,10"/>
 
+            <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.Style>
+                    <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.PercentBlackSelection}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                    <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" VerticalAlignment="Center">Percentage of black pixels:</TextBlock>
+                    <TextBox Margin="5" Grid.Row="1" Text="{Binding PercentBlackSelection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                </Grid>
+
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="85"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Manual}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+
+                    <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Threshold:</TextBlock>
+                    <TextBox Margin="5" Grid.Column="1" Text="{Binding ManualThreshold, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                </Grid>
+                <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <!--<DataTrigger Binding="{Binding CurrentFilterMode}" Value="{x:Static enums:FilterMode.Brightness}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>-->
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+
+                <TextBlock Foreground="#ffca4f" FontWeight="Bold" Margin="5" Grid.RowSpan="2" VerticalAlignment="Center">Brightness:</TextBlock>
+                <TextBox Grid.Row="0" Margin="5" Grid.Column="1"></TextBox>
+                <Slider Margin="5" Grid.Row="1" Grid.Column="1" Minimum="-100" Maximum="100"></Slider>
+            </Grid>
+
+            <Button Grid.Row="0" FontSize="18" Height="40" Margin="0,4,0,4" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}" Click="Apply_Button_Click">Apply</Button>
+            <Button Grid.Row="0" FontSize="18" Height="40" Margin="0,4,0,4" VerticalAlignment="Center" Style="{StaticResource DefaultButtonStyle}">Save image</Button>
+
+        </StackPanel>
     </Grid>
+    <Border Grid.Column="1" x:Name="Border">
+        <Image Grid.Column="1" Panel.ZIndex="0" x:Name="Image" MaxHeight="{Binding ImageMaxHeight}" MaxWidth="{Binding ImageMaxWidth}"
+           MouseWheel="Window_MouseWheel" 
+           MouseLeftButtonDown="Image_MouseLeftButtonDown"
+           MouseLeftButtonUp="Image_MouseLeftButtonUp"
+           MouseMove="Image_MouseMove" 
+           RenderOptions.BitmapScalingMode="NearestNeighbor"
+           Source="{Binding ImageBitmapSource}"/>
+    </Border>
+
+</Grid>
 
    
 </UserControl>
