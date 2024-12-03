@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Paint_Clone.BezierCurveMode.Viewmodels
 {
-    internal class BezierCurveViewmodel : ObservableObject
+    public partial class BezierCurveViewmodel : ObservableObject
     {
     }
 }
