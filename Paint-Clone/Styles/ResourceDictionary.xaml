@@ -87,4 +87,61 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
+    <Style x:Key="CustomGroupBoxStyle" TargetType="GroupBox">
+        <Setter Property="FontFamily" Value="Comic Sans MS" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="BorderBrush" Value="#FFCA4F" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Grid>
+                        <!-- Tło i ramka -->
+                        <Border 
+                        Background="{TemplateBinding Background}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        CornerRadius="10">
+                            <Grid>
+                                <!-- Miejsce na zawartość -->
+                                <ContentPresenter Margin="10,20,10,10" />
+                            </Grid>
+                        </Border>
+                        <!-- Nagłówek -->
+                        <TextBlock 
+                        Text="{TemplateBinding Header}" 
+                        FontFamily="{TemplateBinding FontFamily}" 
+                        FontWeight="{TemplateBinding FontWeight}" 
+                        FontSize="{TemplateBinding FontSize}" 
+                        Foreground="#FFCA4F" 
+                        Background="#36393e"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Margin="15,-14,0,0"
+                        Padding="5,0,5,0"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Stan: mysz nad GroupBox -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="#f0d0a0" />
+                            <Setter Property="Background" Value="#fff0d5" />
+                        </Trigger>
+
+                        <!-- Stan: nieaktywny GroupBox -->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="BorderBrush" Value="#d3d3d3" />
+                            <Setter Property="Foreground" Value="Gray" />
+                            <Setter Property="Background" Value="#f7f7f7" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
 </ResourceDictionary>
