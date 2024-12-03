@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using Paint_Clone.BasicDrawingMode.Views;
+using Paint_Clone.BezierCurveMode.Views;
 using Paint_Clone.ColorSpacesMode.Views;
 using Paint_Clone.DigitalFiltersMode.Views;
 using Paint_Clone.FileFormatsMode.Views;
@@ -41,4 +42,6 @@ public partial class MainWindowViewModel: ObservableObject
     void ShowDigitalFiltersView() => CurrentView = serviceProvider.GetRequiredService<DigitalFiltersView>();
     [RelayCommand]
     void ShowMorphologicalFiltersView() => CurrentView = serviceProvider.GetRequiredService<MorphologicalFiltersView>();
+    [RelayCommand]
+    void ShowBezierCurveModeView() => CurrentView = serviceProvider.GetRequiredService<BezierCurveView>();
 }
