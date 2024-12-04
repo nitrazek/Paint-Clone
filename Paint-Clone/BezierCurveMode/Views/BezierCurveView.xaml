@@ -3,12 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vms="clr-namespace:Paint_Clone.BezierCurveMode.Viewmodels"
+             xmlns:vms="clr-namespace:Paint_Clone.BezierCurveMode.Views"
              xmlns:local="clr-namespace:Paint_Clone.BezierCurveMode.Views"
              mc:Ignorable="d" 
              Background="White"
              d:DesignHeight="675" d:DesignWidth="1280"
-             d:DataContext="{d:DesignInstance vms:BezierCurveViewmodel}">
+             d:DataContext="{d:DesignInstance vms:BezierCurveView}">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -21,10 +21,11 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="180"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Background="gray">
+       
+        <Grid Grid.Column="0" Background="#36393e">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -38,15 +39,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Przyrost t"
+            <Label Foreground="#ffca4f" FontWeight="Bold" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Przyrost t"
        HorizontalContentAlignment="Center"/>
-            <TextBox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding DeltaT, Mode=TwoWay}"/>
+            <TextBox Grid.Column="0" Margin="15,0,15,0" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding DeltaT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Label Grid.Column="0" Grid.Row="2" Content="X" HorizontalContentAlignment="Center"/>
-            <TextBox Grid.Column="0" Grid.Row="3" x:Name="XTextBox"/>
-            <Label Grid.Column="1" Grid.Row="2" Content="Y" HorizontalContentAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="3" x:Name="YTextBox"/>
-            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Content="Dodaj" Click="Add_Click"/>
+            <Label  Foreground="#ffca4f" FontWeight="Bold" Grid.Column="0" Grid.Row="2" Content="X" HorizontalContentAlignment="Center"/>
+            <TextBox Grid.Column="0" Margin="15,0,15,0" Grid.Row="3" x:Name="XTextBox"/>
+            <Label  Foreground="#ffca4f" FontWeight="Bold" Grid.Column="1" Grid.Row="2" Content="Y" HorizontalContentAlignment="Center"/>
+            <TextBox Grid.Column="1" Margin="15,0,15,0" Grid.Row="3" x:Name="YTextBox"/>
+            <Button Height="30" Style="{StaticResource DefaultButtonStyle}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Margin="5" Content="Dodaj" Click="Add_Click"/>
             <ScrollViewer Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5">
                 <!--https://stackoverflow.com/a/33765748/14357934-->
                 <ItemsControl ItemsSource="{Binding Points}">
@@ -79,12 +80,14 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-        <Border Grid.Column="1" BorderThickness="1" BorderBrush="Black" ClipToBounds="True">
+        <Border Grid.Column="1" Background="DarkGray"/>
+        <Border Grid.Column="1" Background="White" BorderThickness="1" BorderBrush="Black" ClipToBounds="True" Height="400" Width="670">
             <Image x:Name="Image" Height="400" Width="670"
        MouseLeftButtonDown="Image_MouseLeftButtonDown"
        MouseLeftButtonUp="Image_MouseLeftButtonUp"
        MouseMove="Image_MouseMove"
-       MouseRightButtonDown="Image_MouseRightButtonDown"/>
+       MouseRightButtonDown="Image_MouseRightButtonDown"
+                   />
         </Border>
     </Grid>
 

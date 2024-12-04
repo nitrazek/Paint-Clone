@@ -67,6 +67,7 @@ public partial class BezierCurveView : UserControl, INotifyPropertyChanged
     public BezierCurveView()
     {
         InitializeComponent();
+        DataContext = this;
         Image.Source = new WriteableBitmap(670, 400, 96, 96, PixelFormats.Bgra32, null);
         draggedPtId = -1;
         Points = new ObservableCollection<HighlightablePoint>();
@@ -212,6 +213,16 @@ public partial class BezierCurveView : UserControl, INotifyPropertyChanged
         Redraw((255 << 24) | (0 << 16) | (0 << 8) | 0); // czarny
                                                         // bmp.AddDirtyRect(new Int32Rect(0, 0, bmp.PixelWidth, bmp.PixelHeight));
         bmp.Unlock();
+    }
+
+    private void Load_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Save_Click(object sender, RoutedEventArgs e)
+    {
+
     }
 
     private void DrawPointRectangle(HighlightablePoint point, int color)

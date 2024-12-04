@@ -13,6 +13,8 @@ using Paint_Clone.FileFormatsMode.Viewmodels;
 using Paint_Clone.FileFormatsMode.Views;
 using Paint_Clone.MorphologicalFiltersMode.Viewmodels;
 using Paint_Clone.MorphologicalFiltersMode.Views;
+using Paint_Clone.Transform2d.Viewmodels;
+using Paint_Clone.Transform2d.Views;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -41,6 +43,7 @@ public partial class App : Application
         services.AddSingleton<DigitalFiltersView>();
         services.AddSingleton<MorphologicalFiltersView>();
         services.AddSingleton<BezierCurveView>();
+        services.AddSingleton<Transform2dView>();
 
         //Viewmodels
         services.AddSingleton<MainWindowViewModel>();
@@ -50,5 +53,6 @@ public partial class App : Application
         services.AddSingleton<DigitalFiltersViewModel>();
         services.AddSingleton<MorphologicalFiltersViewModel>();
         services.AddSingleton<BezierCurveViewmodel>();
+        services.AddSingleton<Transform2dViewmodel>();
     }
 }
