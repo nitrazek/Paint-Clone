@@ -7,45 +7,6 @@ namespace Paint_Clone.BezierCurveMode.Utils
 {
     public static class Bezier
     {
-        // wersja z rekurencją ogonową
-        /* public static void Draw(WriteableBitmap bmp, Point[] points, int color)
-        {
-            int wid = bmp.PixelWidth, hei = bmp.PixelHeight;
-            bmp.Lock();
-            unsafe
-            {
-                int* p = (int*)bmp.BackBuffer;
-                for (double t = 0.0; t < 1.0; t += DELTA_T)
-                {
-                    Point drawPt = GetDrawPoint(points, t);
-                    int x = (int)drawPt.X, y = (int)drawPt.Y;
-                    if (x >= 0 && x < wid && y >= 0 && y < hei)
-                        *(p + x + wid * y) = color;
-                    // bmp.AddDirtyRect(new Int32Rect(x, y, 1, 1));
-                }
-            }
-            bmp.Unlock();
-        }
-
-        private static Point GetDrawPoint(Point[] pts, double t)
-        {
-            if (pts.Length == 2)
-            {
-                Vector vec = pts[1] - pts[0];
-                return pts[0] + t * vec;
-            }
-            Point[] onePtLess = new Point[pts.Length - 1];
-            for (int i = 0; i < onePtLess.Length; ++i)
-            {
-                Point pt = pts[i];
-                Vector vec = pts[i + 1] - pts[i];
-                onePtLess[i] = pt + t * vec;
-            }
-            return GetDrawPoint(onePtLess, t);
-        } */
-
-        // algorytm De Casteljau
-        // https://javascript.info/bezier-curve
         public static void DrawWithDots(WriteableBitmap bmp, ICollection<HighlightablePoint> points,
             double deltaT, int color)
         {
@@ -77,11 +38,8 @@ namespace Paint_Clone.BezierCurveMode.Utils
                     }
                     Point drawPt = temp[0];
                     int x = (int)drawPt.X, y = (int)drawPt.Y;
-                    /* if (x >= 0 && x < wid && y >= 0 && y < hei)
-                    { */
                         *(p + x + wid * y) = color;
                         bmp.AddDirtyRect(new Int32Rect(x, y, 1, 1));
-                    // }
                 }
             }
         }
@@ -97,16 +55,13 @@ namespace Paint_Clone.BezierCurveMode.Utils
                 int* p = (int*)bmp.BackBuffer;
                 double t = 0.0;
                 Point curDrawPt = CalculateDrawPoint(temp, points, t);
-                // rysujemy pojedynczy punkt
                 int x = (int)curDrawPt.X, y = (int)curDrawPt.Y;
-                // if (x >= 0 && x < wid && y >= 0 && y < hei)
                 *(p + x + wid * y) = color;
                 bmp.AddDirtyRect(new Int32Rect(x, y, 1, 1));
                 for (t += deltaT; t <= 1.0; t += deltaT)
                 {
                     prevDrawPt = curDrawPt;
                     curDrawPt = CalculateDrawPoint(temp, points, t);
-                    // rysujemy odcinek od poprzedniego punktu do aktualnego
                     BresenhamLine2(bmp, prevDrawPt, curDrawPt, color);
                 }
             }
@@ -140,7 +95,6 @@ namespace Paint_Clone.BezierCurveMode.Utils
         public static void BresenhamLine1(WriteableBitmap bitmap, Point start, Point end, int color)
         {
             int x1 = (int)start.X, y1 = (int)start.Y, x2 = (int)end.X, y2 = (int)end.Y;
-            // algorytm: https://stackoverflow.com/questions/11678693/all-cases-covered-bresenhams-line-algorithm
             int x = x1, y = y1;
             int w = x2 - x;
             int h = y2 - y;
@@ -158,14 +112,13 @@ namespace Paint_Clone.BezierCurveMode.Utils
                 dx2 = 0;
             }
             int numerator = longest >> 1;
-            int bmpW = bitmap.PixelWidth; // bmpH = bitmap.PixelHeight;
+            int bmpW = bitmap.PixelWidth;
             int bmpWdy1 = bmpW * dy1, bmpWdy2 = bmpW * dy2;
             unsafe
             {
                 int* pBackBuffer = (int*)bitmap.BackBuffer + x + bmpW * y;
                 for (int i = 0; i <= longest; i++)
                 {
-                    // if (x >= 0 && x < bmpW && y >= 0 && y < bmpH)
                     *pBackBuffer = color;
                     numerator += shortest;
                     if (!(numerator < longest))
@@ -177,7 +130,6 @@ namespace Paint_Clone.BezierCurveMode.Utils
                         pBackBuffer += dx2 + bmpWdy2;
                 }
             }
-            // Po zmianie pikseli jest konieczne wywołanie metody AddDirtyRect, która wizualnie aktualizuje bitmapę.
             if (w >= 0)
             {
                 if (h >= 0)
@@ -194,11 +146,9 @@ namespace Paint_Clone.BezierCurveMode.Utils
             }
         }
 
-        // robi to samo co BresenhamLine1, ale wskazuje obiektowi WriteableBitmap do zaktualizowania tylko punkty należące do odcinka, a nie cały prostokąt, którego przekątną jest odcinek
         public static void BresenhamLine2(WriteableBitmap bitmap, Point start, Point end, int color)
         {
             int x1 = (int)start.X, y1 = (int)start.Y, x2 = (int)end.X, y2 = (int)end.Y;
-            // algorytm: https://stackoverflow.com/questions/11678693/all-cases-covered-bresenhams-line-algorithm
             int x = x1, y = y1;
             int w = x2 - x;
             int h = y2 - y;
@@ -216,14 +166,13 @@ namespace Paint_Clone.BezierCurveMode.Utils
                 dx2 = 0;
             }
             int numerator = longest >> 1;
-            int bmpW = bitmap.PixelWidth; // bmpH = bitmap.PixelHeight;
+            int bmpW = bitmap.PixelWidth; 
             int bmpWdy1 = bmpW * dy1, bmpWdy2 = bmpW * dy2;
             unsafe
             {
                 int* pBackBuffer = (int*)bitmap.BackBuffer + x + bmpW * y;
                 for (int i = 0; i <= longest; i++)
                 {
-                    // if (x >= 0 && x < bmpW && y >= 0 && y < bmpH)
                     *pBackBuffer = color;
                     bitmap.AddDirtyRect(new Int32Rect(x, y, 1, 1));
                     numerator += shortest;

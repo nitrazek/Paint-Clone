@@ -3,7 +3,6 @@ using Paint_Clone.AppWindow.ViewModels;
 using Paint_Clone.AppWindow.Views;
 using Paint_Clone.BasicDrawingMode.ViewModels;
 using Paint_Clone.BasicDrawingMode.Views;
-using Paint_Clone.BezierCurveMode.Viewmodels;
 using Paint_Clone.BezierCurveMode.Views;
 using Paint_Clone.ColorSpacesMode.ViewModels;
 using Paint_Clone.ColorSpacesMode.Views;
@@ -13,7 +12,6 @@ using Paint_Clone.FileFormatsMode.Viewmodels;
 using Paint_Clone.FileFormatsMode.Views;
 using Paint_Clone.MorphologicalFiltersMode.Viewmodels;
 using Paint_Clone.MorphologicalFiltersMode.Views;
-using Paint_Clone.Transform2d.Viewmodels;
 using Paint_Clone.Transform2d.Views;
 using System.Configuration;
 using System.Data;
@@ -52,7 +50,5 @@ public partial class App : Application
         services.AddSingleton<FileFormatsViewModel>();
         services.AddSingleton<DigitalFiltersViewModel>();
         services.AddSingleton<MorphologicalFiltersViewModel>();
-        services.AddSingleton<BezierCurveViewmodel>();
-        services.AddSingleton<Transform2dViewmodel>();
     }
 }

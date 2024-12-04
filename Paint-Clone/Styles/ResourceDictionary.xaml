@@ -29,6 +29,12 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="#ff9800"/>
                         </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#d3d3d3"/>
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </Trigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -123,20 +129,6 @@
                         Margin="15,-14,0,0"
                         Padding="5,0,5,0"/>
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <!-- Stan: mysz nad GroupBox -->
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="BorderBrush" Value="#f0d0a0" />
-                            <Setter Property="Background" Value="#fff0d5" />
-                        </Trigger>
-
-                        <!-- Stan: nieaktywny GroupBox -->
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="BorderBrush" Value="#d3d3d3" />
-                            <Setter Property="Foreground" Value="Gray" />
-                            <Setter Property="Background" Value="#f7f7f7" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

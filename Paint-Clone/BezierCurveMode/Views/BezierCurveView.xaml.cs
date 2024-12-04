@@ -1,6 +1,4 @@
-﻿using Paint_Clone.BasicDrawingMode.ViewModels;
-using Paint_Clone.BezierCurveMode.Utils;
-using Paint_Clone.BezierCurveMode.Viewmodels;
+﻿using Paint_Clone.BezierCurveMode.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,13 +22,6 @@ namespace Paint_Clone.BezierCurveMode.Views;
 
 public partial class BezierCurveView : UserControl, INotifyPropertyChanged
 {
-    /* BezierCurveViewmodel viewModel;
-
-     public BezierCurveView(BezierCurveViewmodel viewModel)
-     {
-         InitializeComponent();
-         DataContext = this.viewModel = viewModel;
-     }*/
 
     private ObservableCollection<HighlightablePoint> points;
     public ObservableCollection<HighlightablePoint> Points
@@ -40,7 +31,6 @@ public partial class BezierCurveView : UserControl, INotifyPropertyChanged
     }
     private int draggedPtId;
     public const int POINT_WIDTH = 10, POINT_HEIGHT = 10;
-    // im mniej tym dokładniejsza krzywa Beziera, ale liniowo proporcjonalnie dłużej się rysuje
     private double deltaT;
     public string DeltaT
     {
@@ -127,10 +117,10 @@ public partial class BezierCurveView : UserControl, INotifyPropertyChanged
             }
             ++id;
         }
-        if (draggedPtId == -1) // kursor nie jest w żadnym punkcie kontrolnym krzywej Beziera
+        if (draggedPtId == -1) 
         {
             Cover();
-            Points.Add(new HighlightablePoint(mse.X, mse.Y, this)); // dodajemy nowy punkt kontrolny
+            Points.Add(new HighlightablePoint(mse.X, mse.Y, this));
             Draw();
         }
     }
@@ -204,26 +194,16 @@ public partial class BezierCurveView : UserControl, INotifyPropertyChanged
     {
         var bmp = (WriteableBitmap)Image.Source;
         bmp.Lock();
-        Redraw((255 << 24) | (255 << 16) | (255 << 8) | 255); // biały
+        Redraw((255 << 24) | (255 << 16) | (255 << 8) | 255); 
     }
 
     public void Draw()
     {
         var bmp = (WriteableBitmap)Image.Source;
-        Redraw((255 << 24) | (0 << 16) | (0 << 8) | 0); // czarny
-                                                        // bmp.AddDirtyRect(new Int32Rect(0, 0, bmp.PixelWidth, bmp.PixelHeight));
+        Redraw((255 << 24) | (0 << 16) | (0 << 8) | 0);                                                       
         bmp.Unlock();
     }
 
-    private void Load_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
-
-    private void Save_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
 
     private void DrawPointRectangle(HighlightablePoint point, int color)
     {
