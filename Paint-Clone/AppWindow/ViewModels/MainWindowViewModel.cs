@@ -14,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using Paint_Clone.ImageAnalysisMode.View;
 
 namespace Paint_Clone.AppWindow.ViewModels;
 
@@ -50,4 +51,7 @@ public partial class MainWindowViewModel: ObservableObject
 
     [RelayCommand]
     void Show2dTransformModeView() => CurrentView = serviceProvider.GetRequiredService<Transform2dView>();
+
+    [RelayCommand]
+    void ShowImageAnalysisView() => CurrentView = serviceProvider.GetRequiredService<ImageAnalysisView>();
 }

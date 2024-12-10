@@ -42,7 +42,7 @@
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowMorphologicalFiltersViewCommand}" Grid.Column="4" >Morphological Filters</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowBezierCurveModeViewCommand}" Grid.Column="5" >Bézier Curve</RadioButton>
             <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding Show2dTransformModeViewCommand}" Grid.Column="6" >2D Transform</RadioButton>
-            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Grid.Column="7" IsEnabled="False">Image analysis</RadioButton>
+            <RadioButton GroupName="ToogleModeGroup" Style="{StaticResource DefaultRadioButtonStyle}" Command="{Binding ShowImageAnalysisViewCommand}" Grid.Column="7" >Image analysis</RadioButton>
         </Grid>
         <Rectangle Grid.Row="1" Fill="Black" Panel.ZIndex="1"/>
         <ContentControl Grid.Row="2" Content="{Binding CurrentView}"/>
