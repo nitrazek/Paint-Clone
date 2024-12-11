@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paint-Clone", "Paint-Clone.csproj", "{AC2D10B9-3BB2-4E27-94CF-1DB308A22351}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paint-Clone-Tests", "..\Paint-Clone-Tests\Paint-Clone-Tests.csproj", "{1BFE7657-7FCA-4D10-85A9-6837D64DA6D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{AC2D10B9-3BB2-4E27-94CF-1DB308A22351}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC2D10B9-3BB2-4E27-94CF-1DB308A22351}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC2D10B9-3BB2-4E27-94CF-1DB308A22351}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BFE7657-7FCA-4D10-85A9-6837D64DA6D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BFE7657-7FCA-4D10-85A9-6837D64DA6D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BFE7657-7FCA-4D10-85A9-6837D64DA6D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BFE7657-7FCA-4D10-85A9-6837D64DA6D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
